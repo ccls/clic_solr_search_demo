@@ -2,7 +2,6 @@
 
 This app is being built simply to test full text search using sunspot/rsolr/solr.
 
-
 == Installation
 
 The solr server must be running to access any of the searchable models.  
@@ -12,16 +11,179 @@ you'll get ...
 
  Errno::ECONNREFUSED: Connection refused - connect(2)
 
-
-
  rake db:create
  rake db:migrate
  rake sunspot:solr:start
  rake app:import
  script/server
 
+== Creation
+
+There is no direct correlation between the given database and index so using it as is with sunspot won't work.  The database is organized in a very non-relational hash-like manner.  There are about 50 records for a given subjectID where the label is the study, the variable is a hash key and the value is its value.  This appears to be due to the varying numbers of keys and is almost self-relational.
+
+mysql> describe fake_data;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| hashID    | varchar(50)  | NO   | PRI | NULL    |       |
+| subjectID | varchar(50)  | NO   | MUL | NULL    |       |
+| label     | varchar(50)  | NO   |     | NULL    |       |
+| variable  | varchar(200) | NO   | MUL | NULL    |       |
+| value     | varchar(200) | NO   |     | NULL    |       |
+| indexed   | int(11)      | NO   | MUL | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
 
 
+From reverse engineering an existing db and index.  
+
+ curl "http://localhost:8983/solr/select/?q=*:*&amp;wt=json&amp;facet=true&amp;facet.field=item_type&quot;
+ => "facet_fields":{"item_type":["record",52225,"protocol_item",2463,"study",17]}
+
+The "study" count directly correlates to expected counts.
+
+ mysql> select count(distinct label) from fake_data;
+ => 17
+
+ "project_name":["CCRG, United Kingdom",25561,"UKCCS",5527,"GCCR",4367,"California Childhood Leukemia Study",3590,"ESCALE (France)",2466,"NaReCHem (Greece)",1941,"Italy Study",1759,"Quebec Study",1630,"Brazil-IAL",1269,"QcALL Study",1150,"ELECTRE (France)",1051,"Australia-ALL",975,"Costa Rica Study",920,"New Zealand Study",819,"Seoul Study",611,"ADELE (France)",590,"Manchester, UK Study",479]}
+
+
+However, the "record" count is smaller than expected
+
+ mysql> select count(distinct subjectID) from fake_data;
+ => 60631
+
+ mysql> select count(distinct subjectID) from fake_data where value='CASE';
+ => 27429
+
+ mysql> select count(distinct subjectID) from fake_data where value='CONTROL';
+ => 33202
+
+
+Still not sure what a 'protocol_item' is.
+
+When I facet on item_class, the case count is correct. The control count, is off by 8406?  Where are they?  What are they?  The summation of all but "case", "control" and "CLIC Study" is 2463, which is the aforementioned protocol_item count.
+
+ curl "http://localhost:8983/solr/select/?q=*:*&amp;wt=json&amp;facet=true&amp;facet.field=item_class&quot;
+ => "facet_fields":{"item_class":["case",27429,"control",24796,"Occupational History",749,"Pesticides",667,"Vitamins",259,"Tobacco",180,"Family History",130,"Alcohol",126,"Education",122,"Home Chemicals",112,"Ethnicity",80,"Income",38,"CLIC Study",17]}
+
+
+Getting closer?  Does indexed=0 mean NOT indexed?  Most values are 1, however, there are other values from 43672 to 60624.  What do they mean?  The database seems to contain over 8000 unindexed subjects?  The count is still off by 20 though.  I'm never gonna be able to compare my results at the end if I can't figure this out at the beginning.
+
+ mysql> select variable, value, indexed, count(*) from fake_data where variable='case status' and indexed=0;
+ +-------------+---------+---------+----------+
+ | variable    | value   | indexed | count(*) |
+ +-------------+---------+---------+----------+
+ | case status | CONTROL |       0 |     8426 |
+ +-------------+---------+---------+----------+
+
+
+
+
+
+
+ class Study
+   name
+   world_region
+   country
+   study_design
+   age_group
+   recruitment 
+   creators (string or association?)
+   # not indexed?
+   address
+   institution
+   email
+   contact
+   phonenumber
+   year
+   ethnicity ?
+   # reference Updated LeukStudySummary_05112011_HR.xls
+
+ class ? "protocol_item"
+
+
+ class ? "record"?  QuestionCategories???
+   belongs_to :study
+   delegate :study_name, :to => :study
+   searchable do 
+     string :study_name
+   end
+   # columns in CLIC Sample data_10-8-2010_LM
+   # (nothing about exposures?)
+   # subid	case_status	study_name	world_region	country	subregion	study_design	ascertainment	age_group	method_cytogenetic_subtyping	location_cytogenetic_subtyping	recruitment	subtype	case_DBS	case_BM	case_pretreat_blood	case_blood	case_buccal	case_maternal_blood	case_paternal_blood	case_maternal_buccal	case_paternal_buccal	control_DBS	control_blood	control_buccal	control_saliva	control_maternal_blood	control_paternal_blood	control_maternal_buccal	control_paternal_buccal	control_maternal_saliva	control_paternal_saliva	genotyping_phase_I_metabolic	genotyping_phase_II_metabolic	genotyping_DNA_repair	genotyping_immune_function	genotyping_oxidative_stress	genotyping_folate_metabolism	genotyping_other	cytogenetics_t_12_21	cytogenetics_inv_16	cytogenetics_t_1_19	cytogenetics_t_8_21	cytogenetics_t_9_22	cytogenetics_t_15_17	cytogenetics_11q23_MLL	cytogenetics_trisomy_5	cytogenetics_trisomy_21	cytogenetics_high_hyperdiploid	cytogenetics_low_hyperdiploid	cytogenetics_hypodiploid	cytogenetics_other
+
+
+  # CLIC_comprehensivetable_data_092910_CM.xls contains many questions
+  #	DB_DataDict_DB_110410_CM.xls is very similar
+
+
+
+
+CLIC_sql.sql did not include everything ... so hack away until its happy.
+
+ mysql> create table refer_links( `id` int(11) NOT NULL AUTO_INCREMENT,ref_count int(11),ref_hash varchar(255),PRIMARY KEY (`id`));
+
+ mysql> create table space( `id` int(11) NOT NULL AUTO_INCREMENT,created DATETIME,PRIMARY KEY (`id`));
+
+ mysql> create table studies( `id` int(11) NOT NULL AUTO_INCREMENT,doc_id int(11),PRIMARY KEY (`id`));
+
+ mysql> create table protocol_items( `id` int(11) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`));
+
+
+
+
+    Context
+    Select Multiple
+        Europe 43246
+        Americas 7113
+        Oceana 1266
+        Asia 600
+    Project
+    Select Multiple
+        Participating Studies
+            CCRG, United Kingdom25550
+            UKCCS5185
+            GCCR4356
+            California Childhood Leukemia Study2765
+            ESCALE (France)2446
+            NaReCHem (Greece)1885
+            Italy Study1748
+            Quebec Study1580
+            QcALL Study1149
+            ELECTRE (France)1040
+            Costa Rica Study909
+            Australia-ALL842
+            Brazil-IAL710
+            Seoul Study600
+            ADELE (France)568
+            Manchester, UK Study468
+            New Zealand Study424
+    Category
+    Select Multiple
+        case 27429
+        control 24796
+
+
+Much of the stuff in the index doesn't seem to actually be used?  None of the complex "exposure" stuff seems to be referenced on anything.
+
+== httpd.conf
+
+mods to httpd.conf that were required to get this up.
+
+ Listen 8080
+ <VirtualHost *:8080>
+  ServerName ###########
+  DirectoryIndex index.php
+  DocumentRoot "/Library/WebServer/Documents/compressed_php/public"
+  RewriteEngine On
+ </VirtualHost>
+ <directory "/Library/WebServer/Documents/compressed_php/public">
+  IndexOptions +FancyIndexing NameWidth=*
+  Options Includes FollowSymLinks Indexes
+  AllowOverride All
+  Order allow,deny
+  Allow from all
+ </directory>
 
 
 
