@@ -1,0 +1,53 @@
+<h1>Search</h1>
+
+<% form_tag( search_path, :method => :get ) do %>
+<p>
+  <%= text_field_tag :q, params[:q] %> 
+	<%= submit_tag "Search!", :name => nil %>
+</p>
+<% end %>
+
+<div id='results_wrapper'>
+ <div id='facets'>
+  <h3>Facets</h3>
+  <% if @search.facet_response && @search.facet_response['facet_fields'] %>
+   <% unless @search.facet_response['facet_fields']['class_name'].empty? %>
+    <h4>Book, Chapter or Verse</h4>
+    <ul>
+     <% @search.facet_response['facet_fields']['class_name'].each_slice(2) do |name,count| %>
+      <li><%= link_to "#{name}&nbsp;(#{count})", params.merge(:class => name) %></li>
+     <% end %><%# @search.... %>
+    </ul>
+   <% end %><%# unless @search.facet_response['facet_fields']['class_name'].empty? %>
+   
+   <% unless @search.facet_response['facet_fields']['author_s'].empty? %>
+    <h4>Author(s)</h4>
+    <ul>
+     <% @search.facet_response['facet_fields']['author_s'].each_slice(2) do |name,count| %>
+      <li><%= link_to "#{name}&nbsp;(#{count})", params.merge(:author_s => name) %></li>
+     <% end %><%# @search.... %>
+    </ul>
+   <% end %><%# unless @search.facet_response['facet_fields']['author_s'].empty? %>
+  
+  <% end %><%# if @search.facet_response ...%>
+
+
+
+
+
+
+ </div><!-- id='facets' -->
+
+ <div id='results'>
+  <% unless @search.results.empty? %>
+   <ul>
+    <% @search.results.each do |result| %>
+     <li><%= result.class.name %>&nbsp;:&nbsp;<%= link_to result.to_s, result %></li>
+    <% end %>
+   </ul>
+  <% end %>
+  <p><%= will_paginate(@search.hits) %></p>
+  <p class='page_info'>Displaying page <%=@search.hits.current_page%> of <%=@search.hits.total_pages%> out of <%=@search.total%> results</p>
+ </div><!-- id='results' -->
+
+</div><!-- id='results_wrapper' -->

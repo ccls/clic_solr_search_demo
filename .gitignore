@@ -1,0 +1,8 @@
+versions/
+.DS_Store/
+log/*
+db/*sqlite3
+db/*sqlite3-journal
+db/schema.rb
+solr/
+tmp/*

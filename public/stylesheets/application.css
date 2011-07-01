@@ -1,0 +1,17 @@
+#content {
+	width:100%;
+	display:table;
+	border-collapse:collapse; // key to having table row border
+}
+#results_wrapper {
+	border: 1px solid #EEE;
+	display:table-row;
+}
+#facets {
+	width: 25%;
+	display:table-cell;
+	border-right: 2px solid silver;
+}
+#results {
+	display:table-cell;
+}
