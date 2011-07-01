@@ -7,7 +7,7 @@ development:
 #  timeout: 5000
   adapter: mysql
   encoding: utf8
-  database: book_search_demo_development
+  database: clic_solr_search_demo_development
   username: root
   password:
   host: localhost
