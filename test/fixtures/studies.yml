@@ -1,0 +1,396 @@
+studies_7: 
+  age_group: 0-14 years
+  subregion: 
+  country: France
+  world_region: EUROPE
+  study_name: France - ESCALE
+  overview: |-
+    Principal Investigator: Jacqueline Clavel
+    
+    ESCALE is a population-based case-control study whose main objective is to investigate genetic and environmental risk factors of childhood leukemias, lymphomas, brain tumors, and neuroblastomas. The study commenced in 2003 and covers the country of France. The study population is 91% Caucasian, 1-2% black, and 1-2% Asian.
+    
+    Cases were recruited from all French pediatric oncology departments.
+    Eligibility criteria for cases: residence in France, 0-14 years of age, no previous cancer, availability of biological mother, French speaking, not deceased
+    Case subtype distribution:
+    72% B-ALL
+    10% T-ALL
+    12% AML
+    6% other subtypes
+    
+    Controls were sampled from the general population using telephone sampling and following quotas on age, gender, and number of siblings .
+    Eligibility criteria for controls: same as cases
+  id: 7
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_8: 
+  age_group: 0-14 years
+  subregion: 
+  country: Greece
+  world_region: EUROPE
+  study_name: Greece
+  overview: |-
+    Principal Investigator: Eleni Petridou
+    
+    This is a cohort study aiming to register all the incident cases of childhood leukaemia diagnosed in Greece. In the absence of an official cancer registry in Greece, all six-childhood haematology-oncology departments in the country have established a national network, entitiled Nationwide Registration for Childhood Haematological Malignancies (NaReCHeM), which is coordinated by the Athens University Medical School. Since 1996, NaReCHeM has been collecting nationwide data regarding children diagnosed with either leukaemia or lymphoma. All six paediatric haematology-oncology departments contribute all new incident cases by filling in a questionnaire and contributing whole blood and serum samples.
+    
+    The main objectives of the study are the registration of all childhood (0-14 years old) leukemia and lymphoma cases diagnosed and treated in Greece as well as the series of the matched controls that would allow us to conduct epidemiological reserach studies aiming to identify factors such as demographic, socioeconomic, physiological, health information, medical history, or biological (various hormones, genes, polymorphisms, etc.) possibly related to these diseases.
+    
+    Eligibility criteria for cases: 0-14 years of age, residence in Greece for the past 2 years, incident cases, first cancer
+    Case subtype distribution: 
+    76.0% B-ALL
+    9.0% T-ALL
+    1.4% Mature B
+    12.0% AML
+    1.6% other subtypes
+    
+    Controls are matched 1:1 on the basis of age (+/- 6 months) and gender
+    Eligibility criteria for controls: same age (+/- 6 months) as respective cases, residence in Greece, and hospitalized for minor pediatric ailment
+  id: 8
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: HOSPITAL-BASED
+studies_10: 
+  age_group: 0-18 years
+  subregion: 
+  country: Korea
+  world_region: ASIA
+  study_name: Korea
+  overview: |-
+    Principal Investigator: Daehee Kang
+    
+    This is a multi-center hospital-based case-control study that began in 2003 to find risk factors for childhood leukaemia in Korea, to evaluate the association between genetic polymorphisms and childhood leukaemia and the interaction with environmental exposure such as paternal smoking and genetic polymorphisms on the development of childhood leukaemia.
+    
+    Cases were recruited by trained interviewers using structured questionnaires in collaboration with the Department of Pediatrics in each of three teaching hospitals in Seoul, Korea.
+    Eligibility criteria for cases: age 0-18, incident
+    Case subtype distribution:
+    66% B-ALL, T-ALL 
+    21% AML
+    13% ABL, JML
+    
+    Controls were frequency matched on the basis of gender and age (0, 1-4, 5-9, 10-14, 15+).
+    Eligibility criteria for controls: age 0-18, admitted as non-cancer cases without congenital diseases in the Department of Pediatrics
+    List of eligible diseases: acute gastroenteritis, hernia, pneumonia, LCP (Legg-Calve-Perthes disease), fracture, other infectious diseases, etc.
+  id: 10
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: HOSPITAL-BASED
+studies_9: 
+  age_group: 0-11 years
+  subregion: 
+  country: Italy
+  world_region: EUROPE
+  study_name: Italy
+  overview: |-
+    Principal Investigator: Corrado Magnani
+    
+    This is a population-based case-control study whose main objective is to investigate the association of childhood leukemia with environmental risk factors of physical and chemical origin, parental occupation, and personal risk factors. The study began in 1999 and covers 15 regions of Italy. 
+    
+    Cases were ascertained through monthly notification from the National registry of the Italian association of Paediatric haematology and Oncology (AIEOP).
+    Eligibility criteria for cases: less than 11 years of age, incident, resident in the study are at diagnosis
+    Case subtype distribution:
+    
+    Total leukemia:
+      ALL: 85%
+      AnLL: 15%
+    
+    ALL:       
+      T-cell ALL: 9.5%
+      B-cell ALL: 4.2%
+      preB/common: 86.2%
+    
+    Controls were individually matched 2:1 on the basis of age (two week interval), gender, and region. Controls were recruited from a random sample of children living in the region. The sampling list corresponded to the list of the National Health System. 
+    Eligibility criteria for controls: less than 11 years of age, resident in the study area at time of diagnosis
+  id: 9
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_11: 
+  age_group: 0-14 years
+  subregion: 
+  country: UK
+  world_region: EUROPE
+  study_name: Manchester, UK
+  overview: |-
+    Principal Investigator: Jillian M. Birch, Malcolm Taylor
+    
+    Manchester, UK, is a population-based case-control study whose main objective is to explore hypotheses relating to patterns of infection in early childhood, genetic susceptibility, exposure to potential leukaemogens, and gene-environment interactions. The study population is primarily white European; about 10% are from ethnic minority groups including Afro-Caribbean, Indian, Pakistani, and Bangladeshi.
+    
+    Eligibility criteria for cases: incident cases 0-14 years of age within a defined geographical region of North West England and North Wales at the time of diagnosis
+    Case subtype distribution:
+    67.1% B-ALL
+    9.4% T-ALL
+    18.8% AML
+    4.7% other subtypes (includes ALL cases without immunophenotype)
+    
+    Controls were selected form general practitioner lists for relevant areas (>98% of UK population are reigstered with an NHS G.P  Residential address determines the practices available to individual households).  440 controls were matched to UKCCS cases,plus 558 were matched to other UKCCS cases.
+  id: 11
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: POPULATION-BASED
+studies_12: 
+  age_group: 0-14 years
+  subregion: 
+  country: New Zealand
+  world_region: OCEANA
+  study_name: New Zealand
+  overview: |-
+    Principal Investigator: John D Dockerty
+    
+    This is a population-based case control study which began in 1990 to assess causal factors for leukemia and other cancers in children aged 0-14. The study population is predominantly of European descent. Approximately 15% are Maori.
+    
+    Cases were ascertained from the National Cancer Register, Children's Cancer Register, and electronic hospital admission/discharge system.
+    Eligibility critera for cases: incident cases 0-14 years at diagnosis, born and resident anywhere in New Zealand, diagnosed 1990-93
+    Case subtype distribution:
+    73% B/B-precursor-ALL
+    6% T-ALL
+    18% AML
+    3% other subtypes
+    
+    Controls were selected from the National birth register and individually matched 1:1 on the basis of sex and date of birth registration (within the same quarter and year as case).
+    Eligibility criteria for controls: ages 0-14 on reference date, born and resident in New Zealand
+  id: 12
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_1: 
+  age_group: 0-14 years
+  subregion: 
+  country: Australia
+  world_region: OCEANA
+  study_name: AUS-ALL
+  overview: |-
+    Principal Investigators: Bruce Armstrong, Elizabeth Milne
+    
+    Aus-ALL is a population-based case-control study whose main objective is to identify environmental and genetic risk factors for childhood acute lymphoblastic leukemia. The study commenced in 2003 and covers all states of Australia. Approximately 93% of the study population is white and the remaining 7% are of other races and ethnicities.
+    
+    Case-ascertainment is conducted through contacts with 9 participating hospitals.
+    Eligibility criteria for cases:  Incident cases in children under age 15 years, resident in Australia, no previous cancer, biological mother available and at least one parent who speaks English 
+    Case subtype distribution:
+    87% B-ALL
+    11% T-ALL
+    2% mixed or uncertain lineage
+    
+    Controls are frequency matched on the basis of age, gender, and state of residence and are recruited by random digit dialing.
+    Eligibility criteria for controls: children under age 15 years, resident in Australia, biological mother available and at least one parent who speaks English
+  id: 1
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_13: 
+  age_group: 0-14 years
+  subregion: 
+  country: Canada
+  world_region: AMERICAS
+  study_name: Quebec
+  overview: |-
+    Principal Investigator: Claire Infante-Rivard
+    
+    This is a case-control, case-parental trios, and case-parent-grandparents study started in 1989. The study population is 95% Caucasian, 1.4% Black, 1.3% Asian, and 2.3% other.
+    
+    Cases are recruited from all tertiary care hospitals eligible to treat children with cancer in the Province of Quebec.
+    Eligibility criteria for cases: incident cases in the Province between 1980-2000, 0-14 years of age, no previous cancer
+    
+    Controls are selected using incidence-density sampling from the Family Allowance files and then the Health Insurance files. These are considered continuous and updated censuses of the eligible population. Controls are matched on the basis of age and sex.
+  id: 13
+  ascertainment: 
+  recruitment: ENDED
+  study_design: HOSPITAL-BASED
+studies_2: 
+  age_group: 0-21 months
+  subregion: 
+  country: Brazil
+  world_region: AMERICAS
+  study_name: Brazil
+  overview: |-
+    Principal Investigator: Maria S. Pombo-de-Oliveira
+    
+    Brazil-IAL is a hospital-based case-control study of infant acute leukemia which began in 1999 and covers the following Brazilian states: Rio de Janeiro, São Paulo, Bahia, Mina Gerais, Santa Catarina, Pernambuco, Paraiba, Rio Grande do Sul, and Brasília. The study's main objective is to test the hypothesis that certain environmental exposures could increase the risk of IAL with MLL gene rearrangements, exploring the association of maternal exposure to environmental risk factors and IAL.The race/ethnicity of the study population is categorized by skin color: white, intermediate (admixture of different races), and black. 
+    
+    Case subtype distribution:
+    65% B-ALL
+    4% T-ALL
+    27% AML
+    4% Bi-AL
+  id: 2
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: HOSPITAL-BASED
+studies_14: 
+  age_group: 1-18 years
+  subregion: 
+  country: Canada
+  world_region: AMERICAS
+  study_name: Qc-ALL
+  overview: |-
+    Principal Investigator: Daniel Sinnett
+    
+    QcALL is a hospital-based case-control/parental trios study whose purpose is to validate the functional significance of the genotypes/haplotypes in candidate genes, conduct a case-control study as well as family-based analysis to assess the impact of "functional" SNPs in the risk of childhood ALL, assess gene-gene interactions in exploratory analyses, and measure the effect of parental genetics on the risk of ALL.
+    
+    Cases are recruited from the Clinic of Hemato-oncology, Ste. Justine Hospital.
+    Eligibility criteria for cases: 1-18 years of age, residence in Province of Quebec, incident cases, complete clinical history, and biological material available
+    Case subtype distribution: 
+    B-ALL: 85%
+    T-ALL: 9%
+    Other subtypes: 6%
+    
+    Controls for this study are selected from newborns and pregnant mothers with no obvious diseases.
+    Eligibility criteria for controls: newborns and population controls, residence in Province of Quebec
+  id: 14
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: HOSPITAL-BASED
+studies_3: 
+  age_group: 0-14 years
+  subregion: 
+  country: US
+  world_region: AMERICAS
+  study_name: CCLS
+  overview: |-
+    Principal Investigator: Patricia Buffler
+    
+    CCLS is a population-based case-control study whose main objective is to identify environmental and genetic risk factors for childhood leukemia. The study commenced in 1995 and covers 35 counties in Northern and Central California, USA. The study population is 40% non-Hispanic White, 43% Hispanic, and 17% other race/ethnicity.
+    
+    The study uses rapid case-ascertainment through contacts with 9 participating hospitals.
+    Eligibility criteria for cases: incident cases in children under age 15 years, resident in one of 35 counties at time of diagnosis, no previous cancer, at least one biological parent who speaks English or Spanish
+    Case subtype distribution:
+    74.7% B-ALL
+    8.3% T-ALL
+    16.0% AML
+    1.0% other subtypes
+    
+    Controls are sampled from the California Birth Registry (birth certificates) and individually matched on the basis of date of birth, gender, child's Hispanic status, and mother's race.
+    Eligibility criteria for controls: same as cases and must be born in California (for control selection from the California Birth Registry)
+  id: 3
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: POPULATION-BASED
+studies_15: 
+  age_group: 0-14 years
+  subregion: 
+  country: UK
+  world_region: EUROPE
+  study_name: UKCCS
+  overview: |-
+    Principal Investigator: Eve Roman
+    
+    UKCCS is a population-based case-control study whose main objective is to examine five broad hypotheses: child's exposure to ionising radiation in-utero or after birth, child's exposure to hazardous chemicals in-utero or after birth, exposure of parental germ cells to radiation or hazardous chemicals, ELF EMF exposure post-natally, particularly brain cancers and leukaemias, and abnormal response to common infections in leukaemias and lymphomas. The study covers England, Wales, and Scotland, and the study population is 95% Caucasians and 5% Black/Indian/Pakistani/Bangladeshi/Chinese.
+    
+    Cases were recruited from UKCCSG oncology clinics and cancer registry. 
+    Eligibility criteria for cases: incident cases 0-14 years of age, resident in Great Britain at diagnosis and born in Great Britain, no prior malignancy, and not in local authority care
+    Case subtype distribution:
+    66.5% B-ALL
+    8.4% T-ALL
+    14.4% AML
+    10.8% other subtypes (includes ALL cases without immunophenotype)
+    
+    In England and Wales, controls were children registered with one of the 98 Family Health Services Authorities (FHSAs). In Scotland, controls were children registered with one of the 15 Health Boards (HBs). Controls were matched 2:1 on the basis of month and year of birth, sex, and region of residence.
+    Eligibility criteria for controls: 0-14 years of age, resident in Great Britain at diagnosis and born in Great Britain, no prior malignancy, and not in local authority care
+  id: 15
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_4: 
+  age_group: 0-14 years
+  subregion: 
+  country: Costa Rica
+  world_region: AMERICAS
+  study_name: Costa Rica
+  overview: |-
+    Principal Investigator: Patricia Monge
+    
+    This is a population-based case-control study that covers the entire country of Costa Rica and whose main objective is to test the hypotheses that early childhood or prenatal occupational parental exposures to pesticides and other xenobiotics lead to increased risks of leukemia among the offspring. Face-to-face interviews of parents were conducted during 2001-2003 for cases diagnosed during 1995-2000. The race/ethnicity of the study population is white and mestizo.
+    
+    Cases were recruited from the Cancer Registry and the Children's Hospital of Costa Rica.
+    Eligibility criteria for cases: 0-14 years of age at diagnosis, diagnosed during 1995-2000
+    
+    Controls were drawn from the National Birth Registry using computerized random selection and frequency matched by age.
+  id: 4
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_16: 
+  age_group: 0-14 years
+  subregion: 
+  country: Germany
+  world_region: EUROPE
+  study_name: Germany
+  overview: |-
+    Principal Investigator: Peter Kaatsch
+    
+    The German Childhood Cancer Registry (GCCR) is a population-based cancer registry covering all of Germany whose main objective is to investigate all potential risk factors (causal and/or protective) discussed in the scientific literature.
+    
+    Cases are reported to the German Childhood Cancer Registry.
+    Eligibility criteria for cases: less than 15 years of age, residence in Germany, reported to the Registry (GCCR)
+    Case subtype distribution:
+    B-ALL: 68.2%
+    T-ALL: 8.4%
+    AML: 12.4%
+    Other subtypes: 11.0%
+    
+    Controls are sampled from local population registration offices at the place of residence of the corresponding case. Cases are matched on the basis of gender, date of birth (max. 1 month difference), and residence (community)
+    Eligibility criteria for controls: less than 15 years of age, residence in Germany
+  id: 16
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED
+studies_5: 
+  age_group: 0-14 years
+  subregion: 
+  country: France
+  world_region: EUROPE
+  study_name: France - ADELE
+  overview: |-
+    Principal Investigator: Jacqueline Clavel
+    
+    ADELE is a hospital-based case-control study designed to study genetic and environmental risk factors of childhood acute leukemia. The study commenced in 1995 and covers the country of France. The study population is 91% Caucasian, 1-2% black, and 1-2% Asian.
+    
+    Cases were recruited from all French pediatric oncology departments.
+    Eligibility criteria for cases: residence in France, 0-14 years of age, no previous cancer, availability of biological mother, French speaking, not deceased
+    Case subtype distribution:
+    72% B-ALL
+    10% T-ALL
+    12% AML
+    6% other subtypes
+    
+    Controls were sampled from Pediatric surgery departments and frequency matched on age, sex, centre, and ethnic origin.
+    Eligibility criteria for controls: same as cases
+  id: 5
+  ascertainment: 
+  recruitment: ENDED
+  study_design: HOSPITAL-BASED
+studies_17: 
+  age_group: NS
+  subregion: 
+  country: UK
+  world_region: EUROPE
+  study_name: CCRG
+  overview: |-
+    Principal Investigator: Michael Murphy
+    
+    The Childhood Cancer Research Group (CCRG) maintains and expands with every new year of childhood cancer registrations by the National Registry of Childhood Tumours (NRCT) its ability to conduct birth registration record based case-control studies of leukaemia risk, using population-based cases and matched controls covering England, Wales, and Scotland (i.e. Britain). About one-third are leukaemias.
+    
+    Control birth registration details are selected from birth registers and are matched very closely to cases on sex (male/female), date of birth (forwards or backwards within six months of birth registration) and registration subdistrict in which the birth was registered. For more recently diagnosed cases we have selected two matched controls.
+  id: 17
+  ascertainment: 
+  recruitment: ONGOING
+  study_design: POPULATION-BASED
+studies_6: 
+  age_group: 0-14 years
+  subregion: 
+  country: France
+  world_region: EUROPE
+  study_name: France - ELECTRE
+  overview: |-
+    Principal Investigator: Jacqueline Clavel
+    
+    ELECTRE is a population-based case-control study conducted in parallel with ADELE in 14 French regions over the period from 1995-1999. The main objectives of the study are to investigate the role of early infections, breast-feeding, parental smoking, family history of cancer, and residential history.
+    
+    Cases were ascertained through the National Registry of Childhood Hematopoietic Malignancies.
+    Eligibility criteria for cases: less than 15 years of age, incident, residence in 14 French regions at time of diagnosis
+    
+    Controls were frequency matched on the basis of age and sex and sampled from the same regions as the cases using a random sampling of phone numbers.
+  id: 6
+  ascertainment: 
+  recruitment: ENDED
+  study_design: POPULATION-BASED

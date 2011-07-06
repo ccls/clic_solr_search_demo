@@ -1,5 +1,3 @@
-<h1>Search</h1>
-
 <% form_tag( search_path, :method => :get ) do %>
 <p>
   <%= text_field_tag :q, params[:q] %> 
@@ -7,38 +5,136 @@
 </p>
 <% end %>
 
+<%#
+STUDY
+	AUS-ALL
+	Brazil
+	CCLS
+	CCRG
+	Costa Rica
+	France – ADELE
+	France – ELECTRE
+	France – ESCALE
+	Germany
+	Greece
+	Italy
+	Korea
+	Manchester, UK
+	New Zealand
+	Qc-ALL
+	Quebec
+	UKCCS
+GEOGRAPHY
+	World Region
+		Americas
+		Asia
+		Europe
+		Oceana
+		Country
+			Australia
+			Brazil
+			Canada
+			Costa Rica
+			France
+			Germany
+			Greece
+			Italy
+			Korea
+			New Zealand
+			UK
+			US
+STUDY ATTRIBUTES
+	Recruitment
+		Ended
+		Ongoing
+	Study Design
+		Hospital-based
+		Population-based
+	Eligible Age Groups
+		0-11 years
+		0-14 years
+		0-18 years
+		0-21 months
+		1-18 years
+		NS
+CASE STATUS
+	Case
+		Subtype
+			B-ALL
+			T-ALL
+			AML
+			Other
+			Unknown
+		Cytogenetics
+			t(12,21)
+			inv(16)
+			t(1,19)
+			t(8,21)
+			t(9,22)
+			t(15,17)
+			11q25/MLL
+			Trisomy 5
+			Trisomy 21
+			High hyperdiploid
+			Low hyperdiploid
+			Hypodiploid
+			Other
+	Control
+BIOSPECIMENS
+	Case
+		Child
+			Dried Blood Spot
+			Bone Marrow
+			Pre-treatment Blood
+			Blood
+			Buccal
+		Maternal
+			Blood
+			Buccal
+		Paternal
+			Blood
+			Buccal
+	Control
+		Child
+			Dried Blood Spot
+			Blood
+			Buccal
+			Saliva
+		Maternal
+			Blood
+			Buccal
+			Saliva
+		Paternal
+			Blood
+			Buccal
+			Saliva
+GENOTYPING
+	Phase I Metabolism
+	Phase II Metabolism
+	Immune Function
+	Folate Metabolism
+	DNA Repair
+	Oxidative Stress
+	Other
+%>
+
 <div id='results_wrapper'>
  <div id='facets'>
   <h3>Facets</h3>
-  <% if @search.facet_response && @search.facet_response['facet_fields'] %>
-   <% unless @search.facet_response['facet_fields']['class_name'].empty? %>
-    <h4>Book, Chapter or Verse</h4>
-    <ul>
-     <% @search.facet_response['facet_fields']['class_name'].each_slice(2) do |name,count| %>
-      <li><%= link_to "#{name}&nbsp;(#{count})", params.merge(:class => name) %></li>
-     <% end %><%# @search.... %>
-    </ul>
-   <% end %><%# unless @search.facet_response['facet_fields']['class_name'].empty? %>
-   
-   <% unless @search.facet_response['facet_fields']['author_s'].empty? %>
-    <h4>Author(s)</h4>
-    <ul>
-     <% @search.facet_response['facet_fields']['author_s'].each_slice(2) do |name,count| %>
-      <li><%= link_to "#{name}&nbsp;(#{count})", params.merge(:author_s => name) %></li>
-     <% end %><%# @search.... %>
-    </ul>
-   <% end %><%# unless @search.facet_response['facet_fields']['author_s'].empty? %>
-  
-  <% end %><%# if @search.facet_response ...%>
-
-
-
-
-
-
+  <% @search.facets.each do |facet| %>
+   <b><%= facet.name %></b>
+   <ul>
+    <% facet.rows.each do |row| %>
+     <li><%= link_to row.value, params.merge(facet.name.to_s => row.value) %>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
+    <% end %>
+   </ul>
+  <% end %>
  </div><!-- id='facets' -->
 
  <div id='results'>
+
+<%# just use study_name facet??? %>
+
   <% unless @search.results.empty? %>
    <ul>
     <% @search.results.each do |result| %>

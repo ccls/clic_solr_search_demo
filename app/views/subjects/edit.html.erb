@@ -1,0 +1,196 @@
+<h1>Editing subject</h1>
+
+<% form_for(@subject) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :study_id %><br />
+    <%= f.text_field :study_id %>
+  </p>
+  <p>
+    <%= f.label :subid %><br />
+    <%= f.text_field :subid %>
+  </p>
+  <p>
+    <%= f.label :case_status %><br />
+    <%= f.text_field :case_status %>
+  </p>
+  <p>
+    <%= f.label :method_cytogenetic_subtyping %><br />
+    <%= f.text_field :method_cytogenetic_subtyping %>
+  </p>
+  <p>
+    <%= f.label :location_cytogenetic_subtyping %><br />
+    <%= f.text_field :location_cytogenetic_subtyping %>
+  </p>
+  <p>
+    <%= f.label :recruitment %><br />
+    <%= f.text_field :recruitment %>
+  </p>
+  <p>
+    <%= f.label :subtype %><br />
+    <%= f.text_field :subtype %>
+  </p>
+  <p>
+    <%= f.label :case_DBS %><br />
+    <%= f.check_box :case_DBS %>
+  </p>
+  <p>
+    <%= f.label :case_BM %><br />
+    <%= f.check_box :case_BM %>
+  </p>
+  <p>
+    <%= f.label :case_pretreat_blood %><br />
+    <%= f.check_box :case_pretreat_blood %>
+  </p>
+  <p>
+    <%= f.label :case_blood %><br />
+    <%= f.check_box :case_blood %>
+  </p>
+  <p>
+    <%= f.label :case_buccal %><br />
+    <%= f.check_box :case_buccal %>
+  </p>
+  <p>
+    <%= f.label :case_maternal_blood %><br />
+    <%= f.check_box :case_maternal_blood %>
+  </p>
+  <p>
+    <%= f.label :case_paternal_blood %><br />
+    <%= f.check_box :case_paternal_blood %>
+  </p>
+  <p>
+    <%= f.label :case_maternal_buccal %><br />
+    <%= f.check_box :case_maternal_buccal %>
+  </p>
+  <p>
+    <%= f.label :case_paternal_buccal %><br />
+    <%= f.check_box :case_paternal_buccal %>
+  </p>
+  <p>
+    <%= f.label :control_DBS %><br />
+    <%= f.check_box :control_DBS %>
+  </p>
+  <p>
+    <%= f.label :control_blood %><br />
+    <%= f.check_box :control_blood %>
+  </p>
+  <p>
+    <%= f.label :control_buccal %><br />
+    <%= f.check_box :control_buccal %>
+  </p>
+  <p>
+    <%= f.label :control_saliva %><br />
+    <%= f.check_box :control_saliva %>
+  </p>
+  <p>
+    <%= f.label :control_maternal_blood %><br />
+    <%= f.check_box :control_maternal_blood %>
+  </p>
+  <p>
+    <%= f.label :control_paternal_blood %><br />
+    <%= f.check_box :control_paternal_blood %>
+  </p>
+  <p>
+    <%= f.label :control_maternal_buccal %><br />
+    <%= f.check_box :control_maternal_buccal %>
+  </p>
+  <p>
+    <%= f.label :control_paternal_buccal %><br />
+    <%= f.check_box :control_paternal_buccal %>
+  </p>
+  <p>
+    <%= f.label :control_maternal_saliva %><br />
+    <%= f.check_box :control_maternal_saliva %>
+  </p>
+  <p>
+    <%= f.label :control_paternal_saliva %><br />
+    <%= f.check_box :control_paternal_saliva %>
+  </p>
+  <p>
+    <%= f.label :genotyping_phase_I_metabolic %><br />
+    <%= f.check_box :genotyping_phase_I_metabolic %>
+  </p>
+  <p>
+    <%= f.label :genotyping_phase_II_metabolic %><br />
+    <%= f.check_box :genotyping_phase_II_metabolic %>
+  </p>
+  <p>
+    <%= f.label :genotyping_DNA_repair %><br />
+    <%= f.check_box :genotyping_DNA_repair %>
+  </p>
+  <p>
+    <%= f.label :genotyping_immune_function %><br />
+    <%= f.check_box :genotyping_immune_function %>
+  </p>
+  <p>
+    <%= f.label :genotyping_oxidative_stress %><br />
+    <%= f.check_box :genotyping_oxidative_stress %>
+  </p>
+  <p>
+    <%= f.label :genotyping_folate_metabolism %><br />
+    <%= f.check_box :genotyping_folate_metabolism %>
+  </p>
+  <p>
+    <%= f.label :genotyping_other %><br />
+    <%= f.check_box :genotyping_other %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_t_12_21 %><br />
+    <%= f.check_box :cytogenetics_t_12_21 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_inv_16 %><br />
+    <%= f.check_box :cytogenetics_inv_16 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_t_1_19 %><br />
+    <%= f.check_box :cytogenetics_t_1_19 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_t_8_21 %><br />
+    <%= f.check_box :cytogenetics_t_8_21 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_t_9_22 %><br />
+    <%= f.check_box :cytogenetics_t_9_22 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_t_15_17 %><br />
+    <%= f.check_box :cytogenetics_t_15_17 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_11q23_MLL %><br />
+    <%= f.check_box :cytogenetics_11q23_MLL %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_trisomy_5 %><br />
+    <%= f.check_box :cytogenetics_trisomy_5 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_trisomy_21 %><br />
+    <%= f.check_box :cytogenetics_trisomy_21 %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_high_hyperdiploid %><br />
+    <%= f.check_box :cytogenetics_high_hyperdiploid %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_low_hyperdiploid %><br />
+    <%= f.check_box :cytogenetics_low_hyperdiploid %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_hypodiploid %><br />
+    <%= f.check_box :cytogenetics_hypodiploid %>
+  </p>
+  <p>
+    <%= f.label :cytogenetics_other %><br />
+    <%= f.check_box :cytogenetics_other %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @subject %> |
+<%= link_to 'Back', subjects_path %>

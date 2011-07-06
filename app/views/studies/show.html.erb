@@ -1,0 +1,43 @@
+<p>
+  <b>Name:</b>
+  <%=h @study.study_name %>
+</p>
+
+<p>
+  <b>World region:</b>
+  <%=h @study.world_region %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @study.country %>
+</p>
+
+<p>
+  <b>Subregion:</b>
+  <%=h @study.subregion %>
+</p>
+
+<p>
+  <b>Study design:</b>
+  <%=h @study.study_design %>
+</p>
+
+<p>
+  <b>Ascertainment:</b>
+  <%=h @study.ascertainment %>
+</p>
+
+<p>
+  <b>Age group:</b>
+  <%=h @study.age_group %>
+</p>
+
+<p>
+  <b>Overview:</b>
+  <%=h @study.overview %>
+</p>
+
+
+<%= link_to 'Edit', edit_study_path(@study) %> |
+<%= link_to 'Back', studies_path %>

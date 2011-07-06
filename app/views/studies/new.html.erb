@@ -1,0 +1,43 @@
+<h1>New study</h1>
+
+<% form_for(@study) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :study_name %><br />
+    <%= f.text_field :study_name %>
+  </p>
+  <p>
+    <%= f.label :world_region %><br />
+    <%= f.text_field :world_region %>
+  </p>
+  <p>
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
+  </p>
+  <p>
+    <%= f.label :subregion %><br />
+    <%= f.text_field :subregion %>
+  </p>
+  <p>
+    <%= f.label :study_design %><br />
+    <%= f.text_field :study_design %>
+  </p>
+  <p>
+    <%= f.label :ascertainment %><br />
+    <%= f.text_field :ascertainment %>
+  </p>
+  <p>
+    <%= f.label :age_group %><br />
+    <%= f.text_field :age_group %>
+  </p>
+  <p>
+    <%= f.label :overview %><br />
+    <%= f.text_area :overview %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', studies_path %>

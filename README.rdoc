@@ -21,17 +21,17 @@ you'll get ...
 
 There is no direct correlation between the given database and index so using it as is with sunspot won't work.  The database is organized in a very non-relational hash-like manner.  There are about 50 records for a given subjectID where the label is the study, the variable is a hash key and the value is its value.  This appears to be due to the varying numbers of keys and is almost self-relational.
 
-mysql> describe fake_data;
-+-----------+--------------+------+-----+---------+-------+
-| Field     | Type         | Null | Key | Default | Extra |
-+-----------+--------------+------+-----+---------+-------+
-| hashID    | varchar(50)  | NO   | PRI | NULL    |       |
-| subjectID | varchar(50)  | NO   | MUL | NULL    |       |
-| label     | varchar(50)  | NO   |     | NULL    |       |
-| variable  | varchar(200) | NO   | MUL | NULL    |       |
-| value     | varchar(200) | NO   |     | NULL    |       |
-| indexed   | int(11)      | NO   | MUL | NULL    |       |
-+-----------+--------------+------+-----+---------+-------+
+ mysql> describe fake_data;
+ +-----------+--------------+------+-----+---------+-------+
+ | Field     | Type         | Null | Key | Default | Extra |
+ +-----------+--------------+------+-----+---------+-------+
+ | hashID    | varchar(50)  | NO   | PRI | NULL    |       |
+ | subjectID | varchar(50)  | NO   | MUL | NULL    |       |
+ | label     | varchar(50)  | NO   |     | NULL    |       |
+ | variable  | varchar(200) | NO   | MUL | NULL    |       |
+ | value     | varchar(200) | NO   |     | NULL    |       |
+ | indexed   | int(11)      | NO   | MUL | NULL    |       |
+ +-----------+--------------+------+-----+---------+-------+
 
 
 From reverse engineering an existing db and index.  
@@ -168,7 +168,7 @@ Much of the stuff in the index doesn't seem to actually be used?  None of the co
 
 == httpd.conf
 
-mods to httpd.conf that were required to get this up.
+mods to httpd.conf that were required to get the initial php app (not this app) up and running.
 
  Listen 8080
  <VirtualHost *:8080>

@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => "search", :action => 'show'
+  map.resources :studies
+  map.resources :subjects
+
+  map.root :controller => "searches", :action => 'show'
   map.resource  :search,   :only => :show
 
 
