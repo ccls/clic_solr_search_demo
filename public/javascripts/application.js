@@ -1,2 +1,10 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+jQuery(function(){
+	jQuery('#tabs li a').click(function(){
+		jQuery('#tabs li a').removeClass('current');
+		jQuery(this).addClass('current');
+		tab_content_id = '#'+jQuery(this).parent().attr('class');
+		jQuery('.tab_contents').hide();
+		jQuery(tab_content_id).show();
+		return false;
+	});
+});

@@ -11,7 +11,40 @@
 	width: 25%;
 	display:table-cell;
 	border-right: 2px solid silver;
+	padding-left: 10px;
 }
 #results {
+	padding: 0 10px;
 	display:table-cell;
+}
+#filters {
+	padding: 0 10px;
+	border: 1px solid gray;
+}
+#tabs {
+	border-bottom: 1px solid gray;
+}
+#tabs ul li {
+	display:inline;
+}
+#tabs ul li a {
+	text-decoration:none;
+	padding:5px;
+	font-size:12pt;
+	font-weight:bold;
+	background-color:silver;
+	color:black;
+}
+#tabs ul li a.current {
+	background-color:gray;
+	color:white;
+}
+#studies {
+	display:none;	/* hide initially */
+}
+#questions {
+	display:none;	/* hide initially */
+}
+#pubmed {
+	display:none;	/* hide initially */
 }

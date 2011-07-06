@@ -12,12 +12,12 @@
     <%= f.text_field :world_region %>
   </p>
   <p>
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </p>
-  <p>
     <%= f.label :subregion %><br />
     <%= f.text_field :subregion %>
+  </p>
+  <p>
+    <%= f.label :country %><br />
+    <%= f.text_field :country %>
   </p>
   <p>
     <%= f.label :study_design %><br />
@@ -28,8 +28,20 @@
     <%= f.text_field :ascertainment %>
   </p>
   <p>
+    <%= f.label :recruitment %><br />
+    <%= f.text_field :recruitment %>
+  </p>
+  <p>
     <%= f.label :age_group %><br />
     <%= f.text_field :age_group %>
+  </p>
+  <p>
+    <%#= f.label :method_cytogenetic_subtyping %><br />
+    <%#= f.text_field :method_cytogenetic_subtyping %>
+  </p>
+  <p>
+    <%#= f.label :location_cytogenetic_subtyping %><br />
+    <%#= f.text_field :location_cytogenetic_subtyping %>
   </p>
   <p>
     <%= f.label :overview %><br />
@@ -42,3 +54,4 @@
 
 <%= link_to 'Show', @study %> |
 <%= link_to 'Back', studies_path %>
+

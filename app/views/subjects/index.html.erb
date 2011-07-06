@@ -5,36 +5,7 @@
     <th>Study</th>
     <th>Subid</th>
     <th>Case status</th>
-    <th>Method cytogenetic subtyping</th>
-    <th>Location cytogenetic subtyping</th>
-    <th>Recruitment</th>
     <th>Subtype</th>
-    <th>Case dbs</th>
-    <th>Case bm</th>
-    <th>Case pretreat blood</th>
-    <th>Case blood</th>
-    <th>Case buccal</th>
-    <th>Case maternal blood</th>
-    <th>Case paternal blood</th>
-    <th>Case maternal buccal</th>
-    <th>Case paternal buccal</th>
-    <th>Control dbs</th>
-    <th>Control blood</th>
-    <th>Control buccal</th>
-    <th>Control saliva</th>
-    <th>Control maternal blood</th>
-    <th>Control paternal blood</th>
-    <th>Control maternal buccal</th>
-    <th>Control paternal buccal</th>
-    <th>Control maternal saliva</th>
-    <th>Control paternal saliva</th>
-    <th>Genotyping phase i metabolic</th>
-    <th>Genotyping phase ii metabolic</th>
-    <th>Genotyping dna repair</th>
-    <th>Genotyping immune function</th>
-    <th>Genotyping oxidative stress</th>
-    <th>Genotyping folate metabolism</th>
-    <th>Genotyping other</th>
     <th>Cytogenetics t 12 21</th>
     <th>Cytogenetics inv 16</th>
     <th>Cytogenetics t 1 19</th>
@@ -55,36 +26,7 @@
     <td><%=h subject.study_id %></td>
     <td><%=h subject.subid %></td>
     <td><%=h subject.case_status %></td>
-    <td><%=h subject.method_cytogenetic_subtyping %></td>
-    <td><%=h subject.location_cytogenetic_subtyping %></td>
-    <td><%=h subject.recruitment %></td>
     <td><%=h subject.subtype %></td>
-    <td><%=h subject.case_DBS %></td>
-    <td><%=h subject.case_BM %></td>
-    <td><%=h subject.case_pretreat_blood %></td>
-    <td><%=h subject.case_blood %></td>
-    <td><%=h subject.case_buccal %></td>
-    <td><%=h subject.case_maternal_blood %></td>
-    <td><%=h subject.case_paternal_blood %></td>
-    <td><%=h subject.case_maternal_buccal %></td>
-    <td><%=h subject.case_paternal_buccal %></td>
-    <td><%=h subject.control_DBS %></td>
-    <td><%=h subject.control_blood %></td>
-    <td><%=h subject.control_buccal %></td>
-    <td><%=h subject.control_saliva %></td>
-    <td><%=h subject.control_maternal_blood %></td>
-    <td><%=h subject.control_paternal_blood %></td>
-    <td><%=h subject.control_maternal_buccal %></td>
-    <td><%=h subject.control_paternal_buccal %></td>
-    <td><%=h subject.control_maternal_saliva %></td>
-    <td><%=h subject.control_paternal_saliva %></td>
-    <td><%=h subject.genotyping_phase_I_metabolic %></td>
-    <td><%=h subject.genotyping_phase_II_metabolic %></td>
-    <td><%=h subject.genotyping_DNA_repair %></td>
-    <td><%=h subject.genotyping_immune_function %></td>
-    <td><%=h subject.genotyping_oxidative_stress %></td>
-    <td><%=h subject.genotyping_folate_metabolism %></td>
-    <td><%=h subject.genotyping_other %></td>
     <td><%=h subject.cytogenetics_t_12_21 %></td>
     <td><%=h subject.cytogenetics_inv_16 %></td>
     <td><%=h subject.cytogenetics_t_1_19 %></td>
@@ -104,7 +46,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New subject', new_subject_path %>

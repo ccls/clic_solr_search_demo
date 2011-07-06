@@ -14,153 +14,18 @@
 </p>
 
 <p>
-  <b>Method cytogenetic subtyping:</b>
-  <%=h @subject.method_cytogenetic_subtyping %>
-</p>
-
-<p>
-  <b>Location cytogenetic subtyping:</b>
-  <%=h @subject.location_cytogenetic_subtyping %>
-</p>
-
-<p>
-  <b>Recruitment:</b>
-  <%=h @subject.recruitment %>
-</p>
-
-<p>
   <b>Subtype:</b>
   <%=h @subject.subtype %>
 </p>
 
 <p>
-  <b>Case dbs:</b>
-  <%=h @subject.case_DBS %>
+  <b>Biospecimens:</b>
+  <%= @subject.biospecimens.join(',') %>
 </p>
 
 <p>
-  <b>Case bm:</b>
-  <%=h @subject.case_BM %>
-</p>
-
-<p>
-  <b>Case pretreat blood:</b>
-  <%=h @subject.case_pretreat_blood %>
-</p>
-
-<p>
-  <b>Case blood:</b>
-  <%=h @subject.case_blood %>
-</p>
-
-<p>
-  <b>Case buccal:</b>
-  <%=h @subject.case_buccal %>
-</p>
-
-<p>
-  <b>Case maternal blood:</b>
-  <%=h @subject.case_maternal_blood %>
-</p>
-
-<p>
-  <b>Case paternal blood:</b>
-  <%=h @subject.case_paternal_blood %>
-</p>
-
-<p>
-  <b>Case maternal buccal:</b>
-  <%=h @subject.case_maternal_buccal %>
-</p>
-
-<p>
-  <b>Case paternal buccal:</b>
-  <%=h @subject.case_paternal_buccal %>
-</p>
-
-<p>
-  <b>Control dbs:</b>
-  <%=h @subject.control_DBS %>
-</p>
-
-<p>
-  <b>Control blood:</b>
-  <%=h @subject.control_blood %>
-</p>
-
-<p>
-  <b>Control buccal:</b>
-  <%=h @subject.control_buccal %>
-</p>
-
-<p>
-  <b>Control saliva:</b>
-  <%=h @subject.control_saliva %>
-</p>
-
-<p>
-  <b>Control maternal blood:</b>
-  <%=h @subject.control_maternal_blood %>
-</p>
-
-<p>
-  <b>Control paternal blood:</b>
-  <%=h @subject.control_paternal_blood %>
-</p>
-
-<p>
-  <b>Control maternal buccal:</b>
-  <%=h @subject.control_maternal_buccal %>
-</p>
-
-<p>
-  <b>Control paternal buccal:</b>
-  <%=h @subject.control_paternal_buccal %>
-</p>
-
-<p>
-  <b>Control maternal saliva:</b>
-  <%=h @subject.control_maternal_saliva %>
-</p>
-
-<p>
-  <b>Control paternal saliva:</b>
-  <%=h @subject.control_paternal_saliva %>
-</p>
-
-<p>
-  <b>Genotyping phase i metabolic:</b>
-  <%=h @subject.genotyping_phase_I_metabolic %>
-</p>
-
-<p>
-  <b>Genotyping phase ii metabolic:</b>
-  <%=h @subject.genotyping_phase_II_metabolic %>
-</p>
-
-<p>
-  <b>Genotyping dna repair:</b>
-  <%=h @subject.genotyping_DNA_repair %>
-</p>
-
-<p>
-  <b>Genotyping immune function:</b>
-  <%=h @subject.genotyping_immune_function %>
-</p>
-
-<p>
-  <b>Genotyping oxidative stress:</b>
-  <%=h @subject.genotyping_oxidative_stress %>
-</p>
-
-<p>
-  <b>Genotyping folate metabolism:</b>
-  <%=h @subject.genotyping_folate_metabolism %>
-</p>
-
-<p>
-  <b>Genotyping other:</b>
-  <%=h @subject.genotyping_other %>
+  <b>Genotypings:</b>
+  <%= @subject.genotypings.join(',') %>
 </p>
 
 <p>
@@ -227,7 +92,3 @@
   <b>Cytogenetics other:</b>
   <%=h @subject.cytogenetics_other %>
 </p>
-
-
-<%= link_to 'Edit', edit_subject_path(@subject) %> |
-<%= link_to 'Back', subjects_path %>

@@ -43,7 +43,19 @@ class SearchesController < ApplicationController
 			with  :subtype, params[:subtype] if params[:subtype]
 			facet :subtype
 
-#	principle investigators
+#	what about principle investigators?
+
+#	don't seem to need an array for this to work
+			with(:biospecimens).any_of params[:biospecimens]	if params[:biospecimens]
+			facet :biospecimens
+
+#
+#	Not desired at the moment
+#
+#			with(:genotypings).any_of params[:genotypings]	if params[:genotypings]
+#			facet :genotypings
+
+			facet :study_id
 
 			order_by :created_at, :asc
 			paginate :page => params[:page]

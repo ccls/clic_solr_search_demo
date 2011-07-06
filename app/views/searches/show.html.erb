@@ -1,70 +1,13 @@
-<% form_tag( search_path, :method => :get ) do %>
+<%# form_tag( search_path, :method => :get ) do %>
 <p>
-  <%= text_field_tag :q, params[:q] %> 
-	<%= submit_tag "Search!", :name => nil %>
+  <%#= text_field_tag :q, params[:q] %> 
+	<%#= submit_tag "Search!", :name => nil %>
 </p>
-<% end %>
+<%# end %>
 
 <%#
-STUDY
-	AUS-ALL
-	Brazil
-	CCLS
-	CCRG
-	Costa Rica
-	France – ADELE
-	France – ELECTRE
-	France – ESCALE
-	Germany
-	Greece
-	Italy
-	Korea
-	Manchester, UK
-	New Zealand
-	Qc-ALL
-	Quebec
-	UKCCS
-GEOGRAPHY
-	World Region
-		Americas
-		Asia
-		Europe
-		Oceana
-		Country
-			Australia
-			Brazil
-			Canada
-			Costa Rica
-			France
-			Germany
-			Greece
-			Italy
-			Korea
-			New Zealand
-			UK
-			US
-STUDY ATTRIBUTES
-	Recruitment
-		Ended
-		Ongoing
-	Study Design
-		Hospital-based
-		Population-based
-	Eligible Age Groups
-		0-11 years
-		0-14 years
-		0-18 years
-		0-21 months
-		1-18 years
-		NS
-CASE STATUS
-	Case
-		Subtype
-			B-ALL
-			T-ALL
-			AML
-			Other
-			Unknown
+No good data at the moment
+
 		Cytogenetics
 			t(12,21)
 			inv(16)
@@ -79,71 +22,78 @@ CASE STATUS
 			Low hyperdiploid
 			Hypodiploid
 			Other
-	Control
-BIOSPECIMENS
-	Case
-		Child
-			Dried Blood Spot
-			Bone Marrow
-			Pre-treatment Blood
-			Blood
-			Buccal
-		Maternal
-			Blood
-			Buccal
-		Paternal
-			Blood
-			Buccal
-	Control
-		Child
-			Dried Blood Spot
-			Blood
-			Buccal
-			Saliva
-		Maternal
-			Blood
-			Buccal
-			Saliva
-		Paternal
-			Blood
-			Buccal
-			Saliva
-GENOTYPING
-	Phase I Metabolism
-	Phase II Metabolism
-	Immune Function
-	Folate Metabolism
-	DNA Repair
-	Oxidative Stress
-	Other
 %>
 
 <div id='results_wrapper'>
  <div id='facets'>
   <h3>Facets</h3>
   <% @search.facets.each do |facet| %>
+   <% next if facet.name.to_s == 'study_id' %><%# don't show the study_id facet %>
+   <% next if facet.rows.empty? %><%# don't show empty facets %>
    <b><%= facet.name %></b>
    <ul>
     <% facet.rows.each do |row| %>
-     <li><%= link_to row.value, params.merge(facet.name.to_s => row.value) %>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
+     <li><%= link_to row.value, params.merge(facet.name.to_s => row.value) 
+         %>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
     <% end %>
    </ul>
   <% end %>
+  <p>TODO: remember selected tab (not terribly important)</p>
+  <p>TODO: add exposure related facets</p>
+  <p>TODO: add ability to select multiples with AND or OR</p>
+  <p>TODO: add full text search?</p>
  </div><!-- id='facets' -->
 
  <div id='results'>
+  <div id='filters'>
+   <h3>Filters : found 
+     <%=pluralize(@search.total,'subject')-%> and 
+     <%=pluralize(@search.facet(:study_id).rows.length,'study')-%> matching ...</h3>
+   <% params.each do |k,v| %>
+    <% next if %w(action controller).include?(k) %>
+    <p><%= link_to "#{k}:#{v}&nbsp;[X]", params.merge(k => nil) %></p>
+   <% end %>
+  </div><!-- id='filters' -->
 
-<%# just use study_name facet??? %>
-
-  <% unless @search.results.empty? %>
+  <div id='tabs'>
    <ul>
-    <% @search.results.each do |result| %>
-     <li><%= result.class.name %>&nbsp;:&nbsp;<%= link_to result.to_s, result %></li>
+    <li class='subjects'><a href='javascript:void()' class='current'>Subjects</a></li>
+    <li class='studies'><a href='javascript:void()'>Studies</a></li>
+    <li class='questions'><a href='javascript:void()'>Questions</a></li>
+    <li class='pubmed'><a href='javascript:void()'>PubMed</a></li>
+   </ul>
+  </div><!-- id='tabs' -->
+
+  <div id='subjects' class='tab_contents'>
+   <% unless @search.results.empty? %>
+    <ul>
+     <% @search.results.each do |result| %>
+      <li><%= link_to result.to_s, result %></li>
+     <% end %>
+    </ul>
+   <% end %>
+   <p><%= will_paginate(@search.hits) %></p>
+   <p class='page_info'>Displaying page <%=@search.hits.current_page%> of <%=@search.hits.total_pages%> out of <%=@search.total%> results</p>
+  </div><!-- id='subjects' -->
+
+  <div id='studies' class='tab_contents'>
+   <ul>
+    <% @search.facet(:study_id).rows.each do |row| %>
+     <li><%= link_to row.instance.study_name, study_path(row.value) 
+         %>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
     <% end %>
    </ul>
-  <% end %>
-  <p><%= will_paginate(@search.hits) %></p>
-  <p class='page_info'>Displaying page <%=@search.hits.current_page%> of <%=@search.hits.total_pages%> out of <%=@search.total%> results</p>
- </div><!-- id='results' -->
+  </div><!-- id='studies' -->
 
+  <div id='questions' class='tab_contents'>
+   <h1>Pending</h1>
+   <h2>Still need to parse the questions spreadsheet(s)</h2>
+  </div><!-- id='questions' -->
+
+  <div id='pubmed' class='tab_contents'>
+   <h1>Pending</h1>
+   <h2>Don't know what to put here yet.</h2>
+  </div><!-- id='pubmed' -->
+
+ </div><!-- id='results' -->
 </div><!-- id='results_wrapper' -->
