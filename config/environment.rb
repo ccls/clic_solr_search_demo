@@ -10,6 +10,9 @@ Rails::Initializer.run do |config|
 	config.gem "sunspot_rails"
 	config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list'
 	config.gem 'will_paginate'
+	config.gem 'jakewendt-ruby_extension'
+	config.gem 'jakewendt-rails_extension'
+	config.gem 'jakewendt-simply_helpful'
 
 	# Settings in config/environments/* take precedence over those specified here.
 	# Application configuration should go into files in config/initializers
