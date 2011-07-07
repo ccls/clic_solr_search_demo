@@ -21,17 +21,6 @@ No good data at the moment
  <div id='facets'>
   <h3>Facets</h3>
 
-<%#
-
-
-FORMIFY THIS WITH CHECKBOXES
-
-Add facet operator checkboxes as well
-
-radio_button_tag(name, value, checked = false, options = {})
-check_box_tag(name, value = "1", checked = false, options = {})
-
-%>
   <% form_tag( search_path, :method => :get ) do %>
    <%= submit_tag "Search!", :name => nil %>
    <p>
@@ -41,26 +30,35 @@ check_box_tag(name, value = "1", checked = false, options = {})
    <% @search.facets.each do |facet| -%>
     <% next if facet.name.to_s == 'study_id' -%><%# don't show the study_id facet -%>
     <% next if facet.rows.empty? -%><%# don't show empty facets -%>
-    <b><%= facet.name %></b>
+    <b><%= pluralize(facet.rows.length,facet.name.to_s.titleize) %></b>
+
+<% if facet.name == :biospecimens %>
+<%# ONLY for biospecimens %>
 <div>Multi-select operator
 <%= radio_button_tag "#{facet.name}_op", 'AND',
-  ( params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'AND' ) %><span>AND</span>
+  ( params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'AND' ) %>
+<label for='<%="#{facet.name}_op_and"-%>'>AND</label>
 <%= radio_button_tag "#{facet.name}_op", 'OR',
-	( params["#{facet.name}_op"].blank? || params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'OR' ) %><span>OR</span>
+	( params["#{facet.name}_op"].blank? || params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'OR' ) %>
+<label for='<%="#{facet.name}_op_or"-%>'>OR</label>
 </div>
+<% end %><%# if facet.name == :biospecimens %>
+
     <ul id='<%=facet.name-%>' class='facet_field'>
      <% facet.rows.each do |row| -%>
       <li>
-<%= check_box_tag "#{facet.name}[]", row.value, params[facet.name].include?(row.value), { :id => nil } 
-%><span><%= row.value %></span>
-<%#= link_to row.value, params.merge(facet.name.to_s => row.value) %>
-&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
+<%= check_box_tag "#{facet.name}[]", row.value, params[facet.name].include?(row.value),
+ { :id => "#{facet.name}_#{row.value.html_friendly}" } 
+%><label for='<%="#{facet.name}_#{row.value.html_friendly}"-%>'><span><%= row.value %></span>
+&nbsp;(&nbsp;<%= row.count %>&nbsp;)</label</li>
      <% end -%>
     </ul>
    <% end -%>
    <%= submit_tag "Search!", :name => nil %>
   <% end -%>
   <p>TODO: remember selected tab (not terribly important)</p>
+  <p>TODO: import questions</p>
+  <p>TODO: figure out what pubmed is for</p>
   <p>TODO: add exposure related facets</p>
   <p>TODO: add principal investigator filter?</p>
   <p>TODO: add full text search?</p>

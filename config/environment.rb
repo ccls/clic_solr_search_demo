@@ -47,10 +47,14 @@ Rails::Initializer.run do |config|
 	# config.i18n.default_locale = :de
 end
 
+String.class_eval do
 #	surprised this worked
 #	basically added the method :name to make sunspot happy
-#String.class_eval do
 #	def name
 #		self.to_s
 #	end
-#end
+	def html_friendly
+#		self.downcase.gsub(/[ \-,]/,'_').gsub(/_+/,'_')
+		self.downcase.gsub(/\W/,'_').gsub(/_+/,'_')
+	end
+end
