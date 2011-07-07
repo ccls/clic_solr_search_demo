@@ -13,6 +13,12 @@
 	border-right: 2px solid silver;
 	padding-left: 10px;
 }
+#facets ul.facet_field {
+	padding-left: 10px;
+}
+#facets ul.facet_field li {
+	list-style: none;
+}
 #results {
 	padding: 0 10px;
 	display:table-cell;

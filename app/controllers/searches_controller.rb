@@ -16,38 +16,21 @@ class SearchesController < ApplicationController
 #			with(:class, params[:class].constantize) if params[:class]
 #			facet :class 
 
-
-#	for multiple selections, use .any_of [ .... ]
-#	for overlapping selections, use .all_of [ .... ]
-
 #	facet order is preserved, so the order it is listed here
 #		will be the order that it is presented in the view
 
-			with  :world_region, params[:world_region] if params[:world_region]
-			facet :world_region
-			with  :country, params[:country] if params[:country]
-			facet :country
-			with  :study_name, params[:study_name] if params[:study_name]
-			facet :study_name
-			with  :recruitment, params[:recruitment] if params[:recruitment]
-			facet :recruitment
-			with  :study_design, params[:study_design] if params[:study_design]
-			facet :study_design
-			with  :age_group, params[:age_group] if params[:age_group]
-			facet :age_group
+			%w( world_region country study_name recruitment study_design age_group case_status subtype biospecimens ).each do |p|
+				if params[p]
+					if params[p+'_op'] && params[p+'_op']=='AND'
+						with(p).all_of params[p]
+					else
+						with(p).any_of params[p]
+					end
+				end
+				facet p.to_sym
+			end
 
-			with  :case_status, params[:case_status] if params[:case_status]
-			facet :case_status
-
-#	only for case?
-			with  :subtype, params[:subtype] if params[:subtype]
-			facet :subtype
-
-#	what about principle investigators?
-
-#	don't seem to need an array for this to work
-			with(:biospecimens).any_of params[:biospecimens]	if params[:biospecimens]
-			facet :biospecimens
+##	what about principle investigators?
 
 #
 #	Not desired at the moment

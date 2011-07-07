@@ -1,6 +1,7 @@
 = CLIC Solr Search Demo
 
-This app is being built simply to test full text search using sunspot/rsolr/solr.
+This app is being built simply to test search using sunspot/rsolr/solr.
+
 
 == Installation
 
@@ -11,13 +12,18 @@ you'll get ...
 
  Errno::ECONNREFUSED: Connection refused - connect(2)
 
+
  rake db:create
  rake db:migrate
  rake sunspot:solr:start
  rake app:import
+ rake db:fixtures:load FIXTURES=studies
  script/server
 
-== Creation
+
+
+
+== Original PHP App Notes
 
 There is no direct correlation between the given database and index so using it as is with sunspot won't work.  The database is organized in a very non-relational hash-like manner.  There are about 50 records for a given subjectID where the label is the study, the variable is a hash key and the value is its value.  This appears to be due to the varying numbers of keys and is almost self-relational.
 
@@ -79,46 +85,6 @@ Getting closer?  Does indexed=0 mean NOT indexed?  Most values are 1, however, t
 
 
 
-
-
- class Study
-   name
-   world_region
-   country
-   study_design
-   age_group
-   recruitment 
-   creators (string or association?)
-   # not indexed?
-   address
-   institution
-   email
-   contact
-   phonenumber
-   year
-   ethnicity ?
-   # reference Updated LeukStudySummary_05112011_HR.xls
-
- class ? "protocol_item"
-
-
- class ? "record"?  QuestionCategories???
-   belongs_to :study
-   delegate :study_name, :to => :study
-   searchable do 
-     string :study_name
-   end
-   # columns in CLIC Sample data_10-8-2010_LM
-   # (nothing about exposures?)
-   # subid	case_status	study_name	world_region	country	subregion	study_design	ascertainment	age_group	method_cytogenetic_subtyping	location_cytogenetic_subtyping	recruitment	subtype	case_DBS	case_BM	case_pretreat_blood	case_blood	case_buccal	case_maternal_blood	case_paternal_blood	case_maternal_buccal	case_paternal_buccal	control_DBS	control_blood	control_buccal	control_saliva	control_maternal_blood	control_paternal_blood	control_maternal_buccal	control_paternal_buccal	control_maternal_saliva	control_paternal_saliva	genotyping_phase_I_metabolic	genotyping_phase_II_metabolic	genotyping_DNA_repair	genotyping_immune_function	genotyping_oxidative_stress	genotyping_folate_metabolism	genotyping_other	cytogenetics_t_12_21	cytogenetics_inv_16	cytogenetics_t_1_19	cytogenetics_t_8_21	cytogenetics_t_9_22	cytogenetics_t_15_17	cytogenetics_11q23_MLL	cytogenetics_trisomy_5	cytogenetics_trisomy_21	cytogenetics_high_hyperdiploid	cytogenetics_low_hyperdiploid	cytogenetics_hypodiploid	cytogenetics_other
-
-
-  # CLIC_comprehensivetable_data_092910_CM.xls contains many questions
-  #	DB_DataDict_DB_110410_CM.xls is very similar
-
-
-
-
 CLIC_sql.sql did not include everything ... so hack away until its happy.
 
  mysql> create table refer_links( `id` int(11) NOT NULL AUTO_INCREMENT,ref_count int(11),ref_hash varchar(255),PRIMARY KEY (`id`));
@@ -130,41 +96,6 @@ CLIC_sql.sql did not include everything ... so hack away until its happy.
  mysql> create table protocol_items( `id` int(11) NOT NULL AUTO_INCREMENT,PRIMARY KEY (`id`));
 
 
-
-
-    Context
-    Select Multiple
-        Europe 43246
-        Americas 7113
-        Oceana 1266
-        Asia 600
-    Project
-    Select Multiple
-        Participating Studies
-            CCRG, United Kingdom25550
-            UKCCS5185
-            GCCR4356
-            California Childhood Leukemia Study2765
-            ESCALE (France)2446
-            NaReCHem (Greece)1885
-            Italy Study1748
-            Quebec Study1580
-            QcALL Study1149
-            ELECTRE (France)1040
-            Costa Rica Study909
-            Australia-ALL842
-            Brazil-IAL710
-            Seoul Study600
-            ADELE (France)568
-            Manchester, UK Study468
-            New Zealand Study424
-    Category
-    Select Multiple
-        case 27429
-        control 24796
-
-
-Much of the stuff in the index doesn't seem to actually be used?  None of the complex "exposure" stuff seems to be referenced on anything.
 
 == httpd.conf
 
@@ -186,7 +117,6 @@ mods to httpd.conf that were required to get the initial php app (not this app) 
  </directory>
 
 
-
 == References
 
 * https://github.com/outoftime/sunspot
@@ -195,4 +125,8 @@ mods to httpd.conf that were required to get the initial php app (not this app) 
 * http://masonoise.wordpress.com/2010/02/06/using-sunspot-for-free-text-search-with-redis/
 * http://timcowlishaw.co.uk/post/3179661158/testing-sunspot-with-test-unit
 
+* reference Updated LeukStudySummary_05112011_HR.xls
+* columns in CLIC Sample data_10-8-2010_LM
+* CLIC_comprehensivetable_data_092910_CM.xls contains many questions
+* DB_DataDict_DB_110410_CM.xls is very similar
 

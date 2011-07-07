@@ -1,10 +1,3 @@
-<%# form_tag( search_path, :method => :get ) do %>
-<p>
-  <%#= text_field_tag :q, params[:q] %> 
-	<%#= submit_tag "Search!", :name => nil %>
-</p>
-<%# end %>
-
 <%#
 No good data at the moment
 
@@ -27,20 +20,49 @@ No good data at the moment
 <div id='results_wrapper'>
  <div id='facets'>
   <h3>Facets</h3>
-  <% @search.facets.each do |facet| %>
-   <% next if facet.name.to_s == 'study_id' %><%# don't show the study_id facet %>
-   <% next if facet.rows.empty? %><%# don't show empty facets %>
-   <b><%= facet.name %></b>
-   <ul>
-    <% facet.rows.each do |row| %>
-     <li><%= link_to row.value, params.merge(facet.name.to_s => row.value) 
-         %>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
-    <% end %>
-   </ul>
-  <% end %>
+
+<%#
+
+
+FORMIFY THIS WITH CHECKBOXES
+
+Add facet operator checkboxes as well
+
+radio_button_tag(name, value, checked = false, options = {})
+check_box_tag(name, value = "1", checked = false, options = {})
+
+%>
+  <% form_tag( search_path, :method => :get ) do %>
+   <%= submit_tag "Search!", :name => nil %>
+   <p>
+    <%#= text_field_tag :q, params[:q] %> 
+    <%#= submit_tag "Search!", :name => nil %>
+   </p>
+   <% @search.facets.each do |facet| -%>
+    <% next if facet.name.to_s == 'study_id' -%><%# don't show the study_id facet -%>
+    <% next if facet.rows.empty? -%><%# don't show empty facets -%>
+    <b><%= facet.name %></b>
+<div>Multi-select operator
+<%= radio_button_tag "#{facet.name}_op", 'AND',
+  ( params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'AND' ) %><span>AND</span>
+<%= radio_button_tag "#{facet.name}_op", 'OR',
+	( params["#{facet.name}_op"].blank? || params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'OR' ) %><span>OR</span>
+</div>
+    <ul id='<%=facet.name-%>' class='facet_field'>
+     <% facet.rows.each do |row| -%>
+      <li>
+<%= check_box_tag "#{facet.name}[]", row.value, params[facet.name].include?(row.value), { :id => nil } 
+%><span><%= row.value %></span>
+<%#= link_to row.value, params.merge(facet.name.to_s => row.value) %>
+&nbsp;(&nbsp;<%= row.count %>&nbsp;)</li>
+     <% end -%>
+    </ul>
+   <% end -%>
+   <%= submit_tag "Search!", :name => nil %>
+  <% end -%>
   <p>TODO: remember selected tab (not terribly important)</p>
   <p>TODO: add exposure related facets</p>
-  <p>TODO: add ability to select multiples with AND or OR</p>
+  <p>TODO: add principal investigator filter?</p>
   <p>TODO: add full text search?</p>
  </div><!-- id='facets' -->
 
@@ -51,7 +73,9 @@ No good data at the moment
      <%=pluralize(@search.facet(:study_id).rows.length,'study')-%> matching ...</h3>
    <% params.each do |k,v| %>
     <% next if %w(action controller).include?(k) %>
-    <p><%= link_to "#{k}:#{v}&nbsp;[X]", params.merge(k => nil) %></p>
+    <% next if k =~ /_op$/ %><%# don't show the operators %>
+    <p><%= link_to "#{k}:#{v.join(' '<<(params[k+'_op']||'OR')<<' ')}&nbsp;[X]", 
+           params.merge(k => nil) %></p>
    <% end %>
   </div><!-- id='filters' -->
 
