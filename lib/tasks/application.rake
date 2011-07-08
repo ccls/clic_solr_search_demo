@@ -58,27 +58,100 @@ namespace :app do
 				:assessments   => assessments,
 				:types => types
 			})
+#break if f.lineno > 1
 		end
 
+#
+#
+#
+#		Prepping for facet.pivot ?
+#
+#
+#
+
 #		puts studies.inspect
-studies.each do |study|
-puts
-puts study[:name]
-puts "string exposure : tobacco"
-puts "string exposure:tobacco : #{study[:exposures].collect(&:keys).flatten.uniq.inspect}"
-study[:exposures].each do |exposure|
-exposure.each do |k,v|
-puts "string exposure:tobacco:#{k} : #{v.inspect}"
-v.each do |v2|
-other_keys = (study[:exposures].collect(&:keys).flatten - [k]).uniq
-puts "string exposure:tobacco:#{k}:#{v2} : #{other_keys.inspect}"
-other_keys.each do |v3|
-puts "string exposure:tobacco:#{k}:#{v2}:#{v3} : x"
-end
-end
-end
-end
-end
+##	studies: [{:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], :relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}]
+		studies.each do |study|
+			puts study[:name]
+			puts "exposure = [tobacco]"
+##		study: {:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], 
+##							:relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}
+			four_keys = [:types, :assessments, :relation, :windows]
+##				four_keys: [:types, :assessments, :relation, :windows]
+					puts "exposure:tobacco = #{four_keys.inspect}"
+##				=> exposure:tobacco = [types,assessments,relation,windows]
+			study[:exposures].each do |exposure|
+##			exposure: {:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], 
+##									:relation=>"Mother", :windows=>["Lifetime"]}
+				four_keys.each do |four_key|
+##					four_key: :types
+					four_values = exposure[four_key]
+##					four_values: ["Cigarettes","OtherExample"]
+					puts "exposure:tobacco:#{four_key} = #{four_values.inspect}"
+##				=> exposure:tobacco:types = [Cigarettes,OtherExample]
+					four_values.each do |four_value|
+##						four_value: "Cigarettes"
+						three_keys = four_keys - [ four_key ]    #	[:assessments, :relation, :windows]
+						puts "exposure:tobacco:#{four_key}:#{four_value} = #{three_keys.inspect}"
+##					=> exposure:tobacco:types:Cigarettes = [assessments,relation,windows]
+##						three_keys: [:assessments, :relation, :windows]
+						three_keys.each do |three_key|
+##							three_key: :assessments
+							three_values = exposure[three_key]
+							puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key} = #{three_values.inspect}"
+##						=> exposure:tobacco:types:Cigarettes:assessments = [Per Day]
+##							three_values: ["Per Day"]
+							three_values.each do |three_value|
+#									three_value: "Per Day"
+#
+								two_keys = three_keys - [ three_key ]  #	[:relation, :windows]
+								puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value} = #{two_keys.inspect}"
+##							=> exposure:tobacco:types:Cigarettes:assessments:Per Day = [relation,windows]
+								two_keys.each do |two_key|
+									two_values = exposure[two_key]
+									puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key} = #{two_values.inspect}"
+##								=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation = [Mother]
+									two_values.each do |two_value|
+										one_keys = two_keys - [ two_key ]     #	[:windows]
+										puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key}:#{two_value} = #{one_keys.inspect}"
+##									=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation:Mother = [windows]
+										one_keys.each do |one_key|
+											one_values = exposure[one_key]
+											puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key}:#{two_value}:#{one_key} = #{one_values.inspect}"
+##										=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation:Mother:windows = [Lifetime]
+#											one_values.each do |one_value|
+#
+#	don't think that I need to go this far
+#
+#											end	#		one_values.each do |one_value|
+										end	#		one_keys.each do |one_key|
+									end	#		two_values = exposure[two_value]
+								end	#		two_keys.each do |two_key|
+							end	#		three_values = exposure[three_value]
+						end #		three_keys.each do |three_key|
+					end	#		four_values.each do |four_value|
+				end #		four_keys.each do |four_key|
+			end #		study[:exposures].each do |exposure|
+		end	#		studies.each do |study|
+
+#	studies.each do |study|
+#	puts
+#	puts study[:name]
+#	puts "string exposure : tobacco"
+#	puts "string exposure:tobacco : #{study[:exposures].collect(&:keys).flatten.uniq.inspect}"
+#	study[:exposures].each do |exposure|
+#	exposure.each do |k,v|
+#	puts "string exposure:tobacco:#{k} : #{v.inspect}"
+#	v.each do |v2|
+#	other_keys = (study[:exposures].collect(&:keys).flatten - [k]).uniq
+#	puts "string exposure:tobacco:#{k}:#{v2} : #{other_keys.inspect}"
+#	other_keys.each do |v3|
+#	puts "string exposure:tobacco:#{k}:#{v2}:#{v3} : x"
+#	end
+#	end
+#	end
+#	end
+#	end
 	end
 
 #	task :import => :environment do
