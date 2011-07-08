@@ -11,7 +11,26 @@
 	width: 25%;
 	display:table-cell;
 	border-right: 2px solid silver;
-	padding-left: 10px;
+	padding: 0 10px;
+}
+#facets form input[type=submit] {
+	font-size:16pt;
+	font-weight:bold;
+	border: 2px solid black;
+	width: 100%;
+	/* http://css-radius.heroku.com */
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+
+	background-color: #DDDDDD;
+/* for webkit browsers */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#BBBBBB)); 
+/* for firefox 3.6+  */
+	background-image: -moz-linear-gradient(top,  #FFFFFF,  #BBBBBB); 
+/* for ie , but doesn't seem to work as expected despite other examples working */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#FFFFFF', EndColorStr='#BBBBBB');
+
 }
 #facets ul.facet_field {
 	padding-left: 10px;
