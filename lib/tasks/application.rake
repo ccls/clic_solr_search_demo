@@ -6,6 +6,63 @@ namespace :app do
 		Subject.destroy_all
 	end
 
+	task :import_groupings do	#=> :environment do
+		studies = []
+#	"Study_name",
+#		"Relation to Child",
+#		"Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Lifetime","Current",
+#		"Cigarettes","Cigars","Pipes","Unspecified",
+#		"Cigarettes Per Day","Cigarettes Per Year","Absolute Number of Cigarettes","Yes/No"
+#	"AUS-ALL","Mother",0,0,0,0,0,1,0,1,0,0,0,1,0,0,0
+#	"Brazil","Mother",1,0,0,0,0,0,0,1,0,0,0,0,0,1,1
+
+		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
+		(f=FasterCSV.open("TobaccoMid-levelGroupings_100410_HR.csv", 'rb',{
+			:headers => true })).each do |line|
+			puts "Processing line #{f.lineno}:#{line['Study_name']}"
+
+			study = {}
+
+			if studies.collect{|s|s[:name]}.include?(line['Study_name'])
+				study = studies.find{|s| s[:name] == line['Study_name']}
+			else
+				study = { :name => line['Study_name'] }
+				studies << study
+			end
+
+			windows = []
+			windows.push('Preconception') if line['Preconception'] == '1'
+			windows.push('Pregnancy') if line['Pregnancy'] == '1'
+			windows.push('Trimester') if line['Trimester'] == '1'
+			windows.push('Postnatal') if line['Postnatal'] == '1'
+			windows.push('Breastfeeding') if line['Breastfeeding'] == '1'
+			windows.push('Lifetime') if line['Lifetime'] == '1'
+			windows.push('Current') if line['Current'] == '1'
+
+			types = []
+			types.push('Cigarettes') if line['Cigarettes'] == '1'
+			types.push('Cigars') if line['Cigars'] == '1'
+			types.push('Pipes') if line['Pipes'] == '1'
+			types.push('Unspecified') if line['Unspecified'] == '1'
+
+			assessments = []
+			assessments.push('Cigarettes Per Day') if line['Cigarettes Per Day'] == '1'
+			assessments.push('Cigarettes Per Year') if line['Cigarettes Per Year'] == '1'
+			assessments.push('Absolute Number of Cigarettes') if line['Absolute Number of Cigarettes'] == '1'
+			assessments.push('Yes/No') if line['Yes/No'] == '1'
+
+			study[:exposures] ||= []
+			study[:exposures].push({
+				:relation => line["Relation to Child"],
+				:windows   => windows,
+				:assessments   => assessments,
+				:types => types
+			})
+		end
+
+		puts studies.inspect
+	end
+
 #	task :import => :environment do
 	task :import => :destroy_all do
 
