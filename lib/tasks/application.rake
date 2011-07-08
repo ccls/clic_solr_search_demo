@@ -16,7 +16,7 @@ namespace :app do
 #	"AUS-ALL","Mother",0,0,0,0,0,1,0,1,0,0,0,1,0,0,0
 #	"Brazil","Mother",1,0,0,0,0,0,0,1,0,0,0,0,0,1,1
 
-		LIVE = true	#	false
+		LIVE = false	#true	#	false
 		studies = []
 
 		if LIVE
