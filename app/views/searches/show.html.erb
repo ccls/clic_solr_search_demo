@@ -29,7 +29,7 @@ No good data at the moment
     <% next if facet.rows.empty? -%><%# don't show empty facets -%>
     <b><%= pluralize(facet.rows.length,facet.name.to_s.titleize) %></b>
 
-<% if facet.name == :biospecimens %>
+<% if [:biospecimens,:genotypings].include?(facet.name) %>
 <%# ONLY for biospecimens %>
 <div>Multi-select operator
 <%= radio_button_tag "#{facet.name}_op", 'AND',

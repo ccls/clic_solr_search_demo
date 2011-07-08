@@ -91,6 +91,14 @@ class Subject < ActiveRecord::Base
 		boolean :cytogenetics_low_hyperdiploid
 		boolean :cytogenetics_hypodiploid
 		boolean :cytogenetics_other
+
+#
+#	There's gotta be a better way
+#
+#		dynamic_string :exposures, :multiple => true do
+#			study.facetized_exposures
+#		end
+
 		time :created_at
 		time :updated_at
 	end

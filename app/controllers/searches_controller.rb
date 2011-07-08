@@ -30,13 +30,26 @@ class SearchesController < ApplicationController
 				facet p.to_sym
 			end
 
+#			dynamic :exposures do
+#				facet 'exposures'
+#"exposures:exposures"=>["tobacco"]
+#				params.each do |key,values|
+#					if key =~ /^exposures:exposures/
+#						with(key.sub(/^exposures:/,'')).any_of values
+#						[values].flatten.each do |value|
+#							facet "#{key.sub(/^exposures:/,'')}:#{value}"
+#						end
+#					end
+#				end
+#			end
+
 ##	what about principle investigators?
 
 #
-#	Not desired at the moment
+#	Not desired at the moment.  When it is, just add to the list after biospecimens
 #
-#			with(:genotypings).any_of params[:genotypings]	if params[:genotypings]
-#			facet :genotypings
+##			with(:genotypings).any_of params[:genotypings]	if params[:genotypings]
+##			facet :genotypings
 
 			facet :study_id
 

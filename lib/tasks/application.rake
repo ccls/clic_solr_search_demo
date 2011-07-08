@@ -6,8 +6,8 @@ namespace :app do
 		Subject.destroy_all
 	end
 
-	task :import_groupings do	#=> :environment do
-		studies = []
+#	task :import_groupings do	#=> :environment do
+	task :import_groupings => :environment do
 #	"Study_name",
 #		"Relation to Child",
 #		"Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Lifetime","Current",
@@ -16,18 +16,32 @@ namespace :app do
 #	"AUS-ALL","Mother",0,0,0,0,0,1,0,1,0,0,0,1,0,0,0
 #	"Brazil","Mother",1,0,0,0,0,0,0,1,0,0,0,0,0,1,1
 
+		LIVE = true	#	false
+		studies = []
+
+		if LIVE
+			Study.update_all("exposures = '--- {}'")
+##		Study.update_all(:exposures => {})	#	sets exposures to NULL, but still works
+##		exit
+		end
+
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
 		(f=FasterCSV.open("TobaccoMid-levelGroupings_100410_HR.csv", 'rb',{
 			:headers => true })).each do |line|
 			puts "Processing line #{f.lineno}:#{line['Study_name']}"
 
 			study = {}
-
-			if studies.collect{|s|s[:name]}.include?(line['Study_name'])
-				study = studies.find{|s| s[:name] == line['Study_name']}
-			else
-				study = { :name => line['Study_name'] }
+			if LIVE
+				study = Study.find_by_study_name(line['Study_name'])
+				raise "Can't find study:#{line['Study_name']}" unless study
 				studies << study
+			else
+				if studies.collect{|s|s[:name]}.include?(line['Study_name'])
+					study = studies.find{|s| s[:name] == line['Study_name']}
+				else
+					study = { :name => line['Study_name'] }
+					studies << study
+				end
 			end
 
 			windows = []
@@ -51,15 +65,28 @@ namespace :app do
 			assessments.push('Absolute Number of Cigarettes') if line['Absolute Number of Cigarettes'] == '1'
 			assessments.push('Yes/No') if line['Yes/No'] == '1'
 
-			study[:exposures] ||= []
-			study[:exposures].push({
-				:relation => line["Relation to Child"],
-				:windows   => windows,
-				:assessments   => assessments,
-				:types => types
-			})
+			if LIVE
+				study.exposures['tobacco'] ||= []
+				study.exposures['tobacco'].push({
+					'relation'    => [line["Relation to Child"]],
+					'windows'     => windows,
+					'assessments' => assessments,
+					'types'       => types
+				})
+				study.save
+			else
+				study[:exposures] ||= []
+				study[:exposures].push({
+					:relation    => [line["Relation to Child"]],
+					:windows     => windows,
+					:assessments => assessments,
+					:types       => types
+				})
+			end
 #break if f.lineno > 1
 		end
+
+exit
 
 #
 #
@@ -69,14 +96,13 @@ namespace :app do
 #
 #
 
-#		puts studies.inspect
 ##	studies: [{:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], :relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}]
 		studies.each do |study|
 			puts study[:name]
 			puts "exposure = [tobacco]"
 ##		study: {:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], 
 ##							:relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}
-			four_keys = [:types, :assessments, :relation, :windows]
+			four_keys = ['types', 'assessments', 'relation', 'windows']
 ##				four_keys: [:types, :assessments, :relation, :windows]
 					puts "exposure:tobacco = #{four_keys.inspect}"
 ##				=> exposure:tobacco = [types,assessments,relation,windows]
@@ -134,24 +160,6 @@ namespace :app do
 			end #		study[:exposures].each do |exposure|
 		end	#		studies.each do |study|
 
-#	studies.each do |study|
-#	puts
-#	puts study[:name]
-#	puts "string exposure : tobacco"
-#	puts "string exposure:tobacco : #{study[:exposures].collect(&:keys).flatten.uniq.inspect}"
-#	study[:exposures].each do |exposure|
-#	exposure.each do |k,v|
-#	puts "string exposure:tobacco:#{k} : #{v.inspect}"
-#	v.each do |v2|
-#	other_keys = (study[:exposures].collect(&:keys).flatten - [k]).uniq
-#	puts "string exposure:tobacco:#{k}:#{v2} : #{other_keys.inspect}"
-#	other_keys.each do |v3|
-#	puts "string exposure:tobacco:#{k}:#{v2}:#{v3} : x"
-#	end
-#	end
-#	end
-#	end
-#	end
 	end
 
 #	task :import => :environment do
