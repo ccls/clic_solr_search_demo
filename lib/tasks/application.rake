@@ -60,7 +60,25 @@ namespace :app do
 			})
 		end
 
-		puts studies.inspect
+#		puts studies.inspect
+studies.each do |study|
+puts
+puts study[:name]
+puts "string exposure : tobacco"
+puts "string exposure:tobacco : #{study[:exposures].collect(&:keys).flatten.uniq.inspect}"
+study[:exposures].each do |exposure|
+exposure.each do |k,v|
+puts "string exposure:tobacco:#{k} : #{v.inspect}"
+v.each do |v2|
+other_keys = (study[:exposures].collect(&:keys).flatten - [k]).uniq
+puts "string exposure:tobacco:#{k}:#{v2} : #{other_keys.inspect}"
+other_keys.each do |v3|
+puts "string exposure:tobacco:#{k}:#{v2}:#{v3} : x"
+end
+end
+end
+end
+end
 	end
 
 #	task :import => :environment do
