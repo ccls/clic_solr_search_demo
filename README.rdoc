@@ -21,8 +21,60 @@ you'll get ...
  script/server
 
 
+== Exposures Issues
+ 
+  class Study < ActiveRecord::Base
+ 	  has_many :subjects
+    #
+    #  Study has attribute 'exposures' as text field which is used to hold 
+    #  an array of hashes containing the attributes for a given 
+    #  exposure (:classification,:type,:relation_to_subject,:time_of_exposure,:assessment)
+    serialize :exposures, Array
+    #  This could also be in the db separately if a model called Exposure were created.
+    #  has_many :exposures
+  end
+ 
+  class Subject < ActiveRecord::Base
+    belongs_to :study
+    delegate :study_name, :country, :to => :study
+    searchable do
+      integer :study_id, :references => Study
+      string :study_name
+      string :country
+      integer :subid
+      string :case_status
+      string :subtype
 
+      # what magic goes here to add the study's exposures
+      # to subject searching?
 
+    end
+  end
+ 
+  class SearchesController < ApplicationController
+    def show
+      @search = Subject.search do
+        with  :study_name, params[:study_name] if params[:study_name]
+        facet :study_name
+        with  :country, params[:country] if params[:country]
+        facet :country
+
+        # what magic goes here to 'with' and 'facet' on
+        # the study exposures fields?
+
+      end
+		end
+  end
+
+How to search for subjects that are in a study that has an exposure with 'Mother' as a relation_to_subject?  As is just one of the attributes, should be pretty straight forward.
+
+However, how facet on the other fields with 'Mother' as a relation_to_subject?
+
+How to search for subjects that are in a study that has an exposure with 'Mother' as relation AND 'classification' of 'tobacco'?
+
+How to search for subjects that are in a study that has an exposure with 'Mother' as relation AND 'classification' of 'tobacco' AND an exposure with 'Mother' as relation AND classification of 'pesticide'?
+ 
+ 
 == Original PHP App Notes
 
 There is no direct correlation between the given database and index so using it as is with sunspot won't work.  The database is organized in a very non-relational hash-like manner.  There are about 50 records for a given subjectID where the label is the study, the variable is a hash key and the value is its value.  This appears to be due to the varying numbers of keys and is almost self-relational.
