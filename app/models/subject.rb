@@ -40,43 +40,8 @@ class Subject < ActiveRecord::Base
 		integer :subid
 		string :case_status
 		string :subtype
-		string :genotypings, :multiple => true
+		string :genotypings,  :multiple => true
 		string :biospecimens, :multiple => true
-
-#	Why the separation of case_* and control_*?
-#	These MAY also be study related, rather than subject.
-#		If so, that may explain the separation.  
-#		The study may have not collected blood from control, but did from case.
-#		However, based on the input file of 60k+ subjects, this is not true.
-#			Not all subjects from the same study have the same values.
-#
-#		boolean :case_DBS
-#		boolean :case_BM
-#		boolean :case_pretreat_blood
-#		boolean :case_blood
-#		boolean :case_buccal
-#		boolean :case_maternal_blood
-#		boolean :case_paternal_blood
-#		boolean :case_maternal_buccal
-#		boolean :case_paternal_buccal
-#		boolean :control_DBS
-#		boolean :control_blood
-#		boolean :control_buccal
-#		boolean :control_saliva
-#		boolean :control_maternal_blood
-#		boolean :control_paternal_blood
-#		boolean :control_maternal_buccal
-#		boolean :control_paternal_buccal
-#		boolean :control_maternal_saliva
-#		boolean :control_paternal_saliva
-#
-#		boolean :genotyping_phase_I_metabolic
-#		boolean :genotyping_phase_II_metabolic
-#		boolean :genotyping_DNA_repair
-#		boolean :genotyping_immune_function
-#		boolean :genotyping_oxidative_stress
-#		boolean :genotyping_folate_metabolism
-#		boolean :genotyping_other
 
 		boolean :cytogenetics_t_12_21
 		boolean :cytogenetics_inv_16
