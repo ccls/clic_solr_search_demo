@@ -1,30 +1,28 @@
 <h1>Listing exposures</h1>
 
-<table>
+<table id='study_exposures'>
   <tr>
     <th>Study</th>
-    <th>Klass</th>
+    <th>Category</th>
     <th>Relations</th>
     <th>Windows</th>
     <th>Types</th>
-    <th>Assessments</th>
   </tr>
 
 <% @exposures.each do |exposure| %>
   <tr>
-    <td><%=h exposure.study_id %></td>
-    <td><%=h exposure.klass %></td>
-    <td><%=h exposure.relations %></td>
-    <td><%=h exposure.windows %></td>
-    <td><%=h exposure.types %></td>
-    <td><%=h exposure.assessments %></td>
+    <td class='center'><%=h exposure.study %></td>
+    <td class='center'><%=h exposure.category %></td>
+    <td class='center'><%=h exposure.relation_to_child %></td>
+    <td><%= exposure.windows_of_exposure.join('<br/>') %></td>
+    <td><%= exposure.types.join('<br/>') %></td>
     <td><%= link_to 'Show', exposure %></td>
     <td><%= link_to 'Edit', edit_exposure_path(exposure) %></td>
-    <td><%= link_to 'Destroy', exposure, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%#= link_to 'Destroy', exposure, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New exposure', new_exposure_path %>
+<%#= link_to 'New exposure', new_exposure_path %>
