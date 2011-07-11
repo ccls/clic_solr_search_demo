@@ -1,14 +1,78 @@
 require 'fastercsv'
 namespace :app do
 
-	task :destroy_all => :environment do
+	task :destroy_exposures => :environment do
+		Exposure.destroy_all
+	end
+
+	task :destroy_all => :destroy_exposures do
 		Study.destroy_all
 		Subject.destroy_all
 	end
 
-#	task :import_groupings do	#=> :environment do
-	task :import_groupings => :environment do
-#	"Study_name",
+	task :import_exposures => [:destroy_exposures,
+		:import_tobacco,:import_pesticides,:import_vitamins]
+
+	task :import_vitamins => :environment do
+#	"Study","Relation to Child","Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Folate/Folic Acid","Vitamin A","Beta-carotene","B-complex Vitamins","Vitamin C","Vitamin E","Vitamin Complex","Iron","Calcium","Zinc","Selenium","Antioxidant Combination","Prenatal","Multi Vitamin","Any Vitamin, Mineral, or Dietary Supplements","Brand Name","Fill in the Blank","Days/Week","Times/Day","Times/Week","Times/Month","Times/Year","Number of Weeks","Number of Months","Number of Years","Ages","Dose Assessed"
+#	"Australia-ALL","Mother",1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,1
+#	"Brazil-IAL","Mother",0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+
+
+		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
+		(f=FasterCSV.open("Vitamin-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
+			:headers => true })).each do |line|
+			puts "Processing line #{f.lineno}:#{line['Study']}"
+
+			study = Study.find_by_study_name(line['Study'])
+			raise "Can't find study:#{line['Study']}" unless study
+
+			study.exposures.create!({
+				:category            => 'vitamins',
+				:relation_to_child   => line["Relation to Child"],
+				:windows_of_exposure => windows_of_exposure(line),
+				:types               => vitamin_types(line),
+				:frequencies_of_use  => frequencies_of_use(line),
+				:durations_of_use    => durations_of_use(line)
+#				:dose_assessed       => ?????
+			})
+
+#break if f.lineno > 1
+		end
+	end
+
+	task :import_pesticides => :environment do
+#	remove this first line
+#	,,"Windows of Exposure",,,,,"Type",,,,,,,"Form of Contact",,,,,"Location of Use",,,,,,"Frequency of Contact Assessment",,,,
+#	"Study","Relation to Child","Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Professional Services","Pesiticides","Herbicides","Fungicides","Insecticides","Rodenticides","Bactericides","Not Specified","Direct Handling","Skin Contact","Respiratory Absorption","Oral Absporption/Ingestion","Not Specified","Household","Neighborhood","School","Workplace","Crops","Not Specified","Open-Ended","<5 times per period/≥ 5 times per period","Absolute Number of Times","Times per Month"
+#	"Australia-ALL","Mother",1,1,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0
+#	"Brazil-IAL","Mother",1,1,1,1,1,0,1,1,0,1,0,1,0,1,0,1,1,0,1,0,0,0,1,0,1,0,0,0
+
+		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
+#		(f=FasterCSV.open("TobaccoMid-levelGroupings_100410_HR.csv", 'rb',{
+		(f=FasterCSV.open("Pesticide-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
+			:headers => true })).each do |line|
+			puts "Processing line #{f.lineno}:#{line['Study']}"
+
+			study = Study.find_by_study_name(line['Study'])
+			raise "Can't find study:#{line['Study']}" unless study
+
+			study.exposures.create!({
+				:category            => 'pesticides',
+				:relation_to_child   => line["Relation to Child"],
+				:windows_of_exposure => windows_of_exposure(line),
+				:types               => pesticide_types(line),
+				:forms_of_contact    => forms_of_contact(line),
+				:locations_of_use    => locations_of_use(line),
+				:frequencies_of_contact => frequencies_of_contact(line)
+			})
+
+#break if f.lineno > 1
+		end
+	end
+
+	task :import_tobacco => :environment do
+#	"Study",
 #		"Relation to Child",
 #		"Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Lifetime","Current",
 #		"Cigarettes","Cigars","Pipes","Unspecified",
@@ -16,154 +80,27 @@ namespace :app do
 #	"AUS-ALL","Mother",0,0,0,0,0,1,0,1,0,0,0,1,0,0,0
 #	"Brazil","Mother",1,0,0,0,0,0,0,1,0,0,0,0,0,1,1
 
-		LIVE = false	#true	#	false
-		studies = []
-
-		if LIVE
-			Study.update_all("exposures = '--- {}'")
-##		Study.update_all(:exposures => {})	#	sets exposures to NULL, but still works
-##		exit
-		end
-
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
-		(f=FasterCSV.open("TobaccoMid-levelGroupings_100410_HR.csv", 'rb',{
+		(f=FasterCSV.open("Tobacco-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
 			:headers => true })).each do |line|
-			puts "Processing line #{f.lineno}:#{line['Study_name']}"
+			puts "Processing line #{f.lineno}:#{line['Study']}"
 
-			study = {}
-			if LIVE
-				study = Study.find_by_study_name(line['Study_name'])
-				raise "Can't find study:#{line['Study_name']}" unless study
-				studies << study
-			else
-				if studies.collect{|s|s[:name]}.include?(line['Study_name'])
-					study = studies.find{|s| s[:name] == line['Study_name']}
-				else
-					study = { :name => line['Study_name'] }
-					studies << study
-				end
-			end
+			study = Study.find_by_study_name(line['Study'])
+			raise "Can't find study:#{line['Study']}" unless study
 
-			windows = []
-			windows.push('Preconception') if line['Preconception'] == '1'
-			windows.push('Pregnancy') if line['Pregnancy'] == '1'
-			windows.push('Trimester') if line['Trimester'] == '1'
-			windows.push('Postnatal') if line['Postnatal'] == '1'
-			windows.push('Breastfeeding') if line['Breastfeeding'] == '1'
-			windows.push('Lifetime') if line['Lifetime'] == '1'
-			windows.push('Current') if line['Current'] == '1'
+			study.exposures.create!({
+				:category             => 'tobacco',
+				:relation_to_child    => line["Relation to Child"],
+				:windows_of_exposure  => windows_of_exposure(line),
+				:types                => tobacco_types(line),
+				:exposure_assessments => tobacco_assessments(line)
+			})
 
-			types = []
-			types.push('Cigarettes') if line['Cigarettes'] == '1'
-			types.push('Cigars') if line['Cigars'] == '1'
-			types.push('Pipes') if line['Pipes'] == '1'
-			types.push('Unspecified') if line['Unspecified'] == '1'
-
-			assessments = []
-			assessments.push('Cigarettes Per Day') if line['Cigarettes Per Day'] == '1'
-			assessments.push('Cigarettes Per Year') if line['Cigarettes Per Year'] == '1'
-			assessments.push('Absolute Number of Cigarettes') if line['Absolute Number of Cigarettes'] == '1'
-			assessments.push('Yes/No') if line['Yes/No'] == '1'
-
-			if LIVE
-				study.exposures['tobacco'] ||= []
-				study.exposures['tobacco'].push({
-					'relation'    => [line["Relation to Child"]],
-					'windows'     => windows,
-					'assessments' => assessments,
-					'types'       => types
-				})
-				study.save
-			else
-				study[:exposures] ||= []
-				study[:exposures].push({
-					:relation    => [line["Relation to Child"]],
-					:windows     => windows,
-					:assessments => assessments,
-					:types       => types
-				})
-			end
 #break if f.lineno > 1
 		end
-
-exit
-
-#
-#
-#
-#		Prepping for facet.pivot ?
-#
-#
-#
-
-##	studies: [{:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], :relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}]
-		studies.each do |study|
-			puts study[:name]
-			puts "exposure = [tobacco]"
-##		study: {:exposures=>[{:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], 
-##							:relation=>"Mother", :windows=>["Lifetime"]}], :name=>"AUS-ALL"}
-			four_keys = ['types', 'assessments', 'relation', 'windows']
-##				four_keys: [:types, :assessments, :relation, :windows]
-					puts "exposure:tobacco = #{four_keys.inspect}"
-##				=> exposure:tobacco = [types,assessments,relation,windows]
-			study[:exposures].each do |exposure|
-##			exposure: {:types=>["Cigarettes","OtherExample"], :assessments=>["Per Day"], 
-##									:relation=>"Mother", :windows=>["Lifetime"]}
-				four_keys.each do |four_key|
-##					four_key: :types
-					four_values = exposure[four_key]
-##					four_values: ["Cigarettes","OtherExample"]
-					puts "exposure:tobacco:#{four_key} = #{four_values.inspect}"
-##				=> exposure:tobacco:types = [Cigarettes,OtherExample]
-					four_values.each do |four_value|
-##						four_value: "Cigarettes"
-						three_keys = four_keys - [ four_key ]    #	[:assessments, :relation, :windows]
-						puts "exposure:tobacco:#{four_key}:#{four_value} = #{three_keys.inspect}"
-##					=> exposure:tobacco:types:Cigarettes = [assessments,relation,windows]
-##						three_keys: [:assessments, :relation, :windows]
-						three_keys.each do |three_key|
-##							three_key: :assessments
-							three_values = exposure[three_key]
-							puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key} = #{three_values.inspect}"
-##						=> exposure:tobacco:types:Cigarettes:assessments = [Per Day]
-##							three_values: ["Per Day"]
-							three_values.each do |three_value|
-#									three_value: "Per Day"
-#
-								two_keys = three_keys - [ three_key ]  #	[:relation, :windows]
-								puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value} = #{two_keys.inspect}"
-##							=> exposure:tobacco:types:Cigarettes:assessments:Per Day = [relation,windows]
-								two_keys.each do |two_key|
-									two_values = exposure[two_key]
-									puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key} = #{two_values.inspect}"
-##								=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation = [Mother]
-									two_values.each do |two_value|
-										one_keys = two_keys - [ two_key ]     #	[:windows]
-										puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key}:#{two_value} = #{one_keys.inspect}"
-##									=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation:Mother = [windows]
-										one_keys.each do |one_key|
-											one_values = exposure[one_key]
-											puts "exposure:tobacco:#{four_key}:#{four_value}:#{three_key}:#{three_value}:#{two_key}:#{two_value}:#{one_key} = #{one_values.inspect}"
-##										=> exposure:tobacco:types:Cigarettes:assessments:Per Day:relation:Mother:windows = [Lifetime]
-#											one_values.each do |one_value|
-#
-#	don't think that I need to go this far
-#
-#											end	#		one_values.each do |one_value|
-										end	#		one_keys.each do |one_key|
-									end	#		two_values = exposure[two_value]
-								end	#		two_keys.each do |two_key|
-							end	#		three_values = exposure[three_value]
-						end #		three_keys.each do |three_key|
-					end	#		four_values.each do |four_value|
-				end #		four_keys.each do |four_key|
-			end #		study[:exposures].each do |exposure|
-		end	#		studies.each do |study|
-
 	end
 
-#	task :import => :environment do
-	task :import => :destroy_all do
+	task :import_subjects => :destroy_all do
 
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
 		(f=FasterCSV.open("CLIC_Sample_data_10-8-2010_LM.csv", 'rb',{
@@ -178,6 +115,8 @@ exit
 				:study_design  => line['study_design'],
 				:ascertainment => line['ascertainment'],
 				:recruitment   => line['recruitment'],
+				:method_cytogenetic_subtyping => line['method_cytogenetic_subtyping'],
+				:location_cytogenetic_subtyping => line['location_cytogenetic_subtyping'],
 				:age_group     => line['age_group']
 			})
 
@@ -213,111 +152,6 @@ exit
 				:biospecimens => biospecimens,
 				:genotypings => genotypings,
 
-#	possible study related rather than subject related
-				:method_cytogenetic_subtyping => line['method_cytogenetic_subtyping'],
-				:location_cytogenetic_subtyping => line['location_cytogenetic_subtyping'],
-
-#	remove case_/control_ prefix and merge
-#	
-#				:case_DBS => line['case_DBS'],
-#				:case_BM => line['case_BM'],
-#				:case_pretreat_blood => line['case_pretreat_blood'],
-#				:case_blood => line['case_blood'],
-#				:case_buccal => line['case_buccal'],
-#				:case_maternal_blood => line['case_maternal_blood'],
-#				:case_paternal_blood => line['case_paternal_blood'],
-#				:case_maternal_buccal => line['case_maternal_buccal'],
-#				:case_paternal_buccal => line['case_paternal_buccal'],
-#				:control_DBS => line['control_DBS'],
-#				:control_blood => line['control_blood'],
-#				:control_buccal => line['control_buccal'],
-#				:control_saliva => line['control_saliva'],
-#				:control_maternal_blood => line['control_maternal_blood'],
-#				:control_paternal_blood => line['control_paternal_blood'],
-#				:control_maternal_buccal => line['control_maternal_buccal'],
-#				:control_paternal_buccal => line['control_paternal_buccal'],
-#				:control_maternal_saliva => line['control_maternal_saliva'],
-#				:control_paternal_saliva => line['control_paternal_saliva'],
-#
-#	demo has these all nested
-# make genotyping an array with values as [phase_I_metabolic, ....] ?
-#	only used to flag true so ....
-#	study has many genotypings?
-#	same for cytogenetics? actually has a value as opposed to a flag, so many not work
-#	may be able to do this with biospecimens as are also just flags and not arrays
-#
-#	WARNING: may be subject and not study related as counts are not consistent (for both genotyping and biospecimens)
-#
-#	genotyping has only a name 'dna_repair', 'folate_metabolism', .... ?
-#+----------------+-------------------------------+-------+----------+
-#| label          | variable                      | value | count(*) |
-#+----------------+-------------------------------+-------+----------+
-#| AUS-ALL        | genotyping_DNA_repair         | 1     |      687 |
-#| CCLS           | genotyping_DNA_repair         | 1     |     1635 |
-#| France - ADELE | genotyping_DNA_repair         | 1     |      336 |
-#| Korea          | genotyping_DNA_repair         | 1     |      520 |
-#| Qc-ALL         | genotyping_DNA_repair         | 1     |      870 |
-#| Quebec         | genotyping_DNA_repair         | 1     |      976 |
-#| NULL           | genotyping_DNA_repair         | 1     |     5024 |
-#| NULL           | genotyping_DNA_repair         | NULL  |     5024 |
-#| AUS-ALL        | genotyping_folate_metabolism  | 1     |      687 |
-#| Brazil         | genotyping_folate_metabolism  | 1     |      238 |
-#| CCLS           | genotyping_folate_metabolism  | 1     |     1635 |
-#| UKCCS          | genotyping_folate_metabolism  | 1     |     1125 |
-#| NULL           | genotyping_folate_metabolism  | 1     |     3685 |
-#| NULL           | genotyping_folate_metabolism  | NULL  |     3685 |
-#| AUS-ALL        | genotyping_immune_function    | 1     |      687 |
-#| CCLS           | genotyping_immune_function    | 1     |     1635 |
-#| France - ADELE | genotyping_immune_function    | 1     |      336 |
-#| Korea          | genotyping_immune_function    | 1     |      520 |
-#| Manchester, UK | genotyping_immune_function    | 1     |      422 |
-#| Quebec         | genotyping_immune_function    | 1     |      976 |
-#| UKCCS          | genotyping_immune_function    | 1     |     1125 |
-#| NULL           | genotyping_immune_function    | 1     |     5701 |
-#| NULL           | genotyping_immune_function    | NULL  |     5701 |
-#| Brazil         | genotyping_other              | 1     |      238 |
-#| Korea          | genotyping_other              | 1     |      520 |
-#| Qc-ALL         | genotyping_other              | 1     |      870 |
-#| Quebec         | genotyping_other              | 1     |      976 |
-#| NULL           | genotyping_other              | 1     |     2604 |
-#| NULL           | genotyping_other              | NULL  |     2604 |
-#| AUS-ALL        | genotyping_oxidative_stress   | 1     |      687 |
-#| CCLS           | genotyping_oxidative_stress   | 1     |     1635 |
-#| Korea          | genotyping_oxidative_stress   | 1     |      520 |
-#| Qc-ALL         | genotyping_oxidative_stress   | 1     |      870 |
-#| Quebec         | genotyping_oxidative_stress   | 1     |      976 |
-#| NULL           | genotyping_oxidative_stress   | 1     |     4688 |
-#| NULL           | genotyping_oxidative_stress   | NULL  |     4688 |
-#| AUS-ALL        | genotyping_phase_II_metabolic | 1     |      687 |
-#| Brazil         | genotyping_phase_II_metabolic | 1     |      238 |
-#| CCLS           | genotyping_phase_II_metabolic | 1     |     1635 |
-#| France - ADELE | genotyping_phase_II_metabolic | 1     |      336 |
-#| Qc-ALL         | genotyping_phase_II_metabolic | 1     |      870 |
-#| Quebec         | genotyping_phase_II_metabolic | 1     |      976 |
-#| NULL           | genotyping_phase_II_metabolic | 1     |     4742 |
-#| NULL           | genotyping_phase_II_metabolic | NULL  |     4742 |
-#| AUS-ALL        | genotyping_phase_I_metabolic  | 1     |      687 |
-#| Brazil         | genotyping_phase_I_metabolic  | 1     |      238 |
-#| CCLS           | genotyping_phase_I_metabolic  | 1     |     1635 |
-#| France - ADELE | genotyping_phase_I_metabolic  | 1     |      336 |
-#| Korea          | genotyping_phase_I_metabolic  | 1     |      520 |
-#| Qc-ALL         | genotyping_phase_I_metabolic  | 1     |      870 |
-#| Quebec         | genotyping_phase_I_metabolic  | 1     |      976 |
-#| NULL           | genotyping_phase_I_metabolic  | 1     |     5262 |
-#| NULL           | genotyping_phase_I_metabolic  | NULL  |     5262 |
-#| NULL           | NULL                          | NULL  |    31706 |
-#+----------------+-------------------------------+-------+----------+
-
-#				:genotyping_phase_I_metabolic => line['genotyping_phase_I_metabolic'],
-#				:genotyping_phase_II_metabolic => line['genotyping_phase_II_metabolic'],
-#				:genotyping_DNA_repair => line['genotyping_DNA_repair'],
-#				:genotyping_immune_function => line['genotyping_immune_function'],
-#				:genotyping_oxidative_stress => line['genotyping_oxidative_stress'],
-#				:genotyping_folate_metabolism => line['genotyping_folate_metabolism'],
-#				:genotyping_other => line['genotyping_other'],
-
-#	:genotypings => [ blah, blah, blah ],
-
 #	all vals at the moment
 				:cytogenetics_t_12_21 => line['cytogenetics_t_12_21'],
 				:cytogenetics_inv_16 => line['cytogenetics_inv_16'],
@@ -338,4 +172,78 @@ exit
 
 	end
 
+end
+
+#	could possibly merge all these into a single method
+
+def windows_of_exposure(line)
+	fields = %w( Preconception Pregnancy Trimester Postnatal Breastfeeding Lifetime Current )
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def tobacco_types(line)
+	fields = %w( Cigarettes Cigars Pipes Unspecified )
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def vitamin_types(line)
+	fields = ['Folate/Folic Acid','Vitamin A','Beta-carotene','B-complex Vitamins','Vitamin C','Vitamin E','Vitamin Complex','Iron','Calcium','Zinc','Selenium','Antioxidant Combination','Prenatal','Multi Vitamin','Any Vitamin, Mineral, or Dietary Supplements','Brand Name']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def pesticide_types(line)
+	fields = ['Professional Services','Pesiticides','Herbicides','Fungicides','Insecticides','Rodenticides','Bactericides']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def tobacco_assessments(line)
+	fields = [ 'Cigarettes Per Day', 'Cigarettes Per Year',
+		'Absolute Number of Cigarettes', 'Yes/No']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def frequencies_of_use(line)
+	fields = ['Fill in the Blank','Days/Week',
+		'Times/Day','Times/Week','Times/Month','Times/Year']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def durations_of_use(line)
+	fields = ['Number of Weeks','Number of Months','Number of Years','Ages']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def forms_of_contact(line)
+	fields = ['Not Specified','Direct Handling','Skin Contact','Respiratory Absorption','Oral Absporption/Ingestion']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def locations_of_use(line)
+	fields = ['Not Specified','Household','Neighborhood','School','Workplace','Crops']
+	fields.select do |f|
+		line[f] == '1'
+	end
+end
+
+def frequencies_of_contact(line)
+	fields = ['Not Specified','Open-Ended','<5 times per period/≥ 5 times per period','Absolute Number of Times','Times per Month']
+	fields.select do |f|
+		line[f] == '1'
+	end
 end

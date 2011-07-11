@@ -6,8 +6,26 @@ class SearchesController < ApplicationController
 #	
 #	I think that there is a ping method
 #
-#		@search = Sunspot.search(Book,Chapter,Verse) do
-		@search = Sunspot.search(Subject) do
+
+		@exposure_search = Exposure.search do
+			facet :category
+			if params[:category]
+				with :category, params[:category]
+				%w( relation_to_child types windows_of_exposure exposure_assessments forms_of_contact locations_of_use frequencies_of_contact frequencies_of_use durations_of_use ).each do |p|
+					if params[p]
+						with(p).any_of params[p]
+					end
+					facet p.to_sym
+				end
+			end
+			facet :study_id
+		end
+		study_ids = @exposure_search.facet(:study_id).rows.collect(&:value)
+
+#		get the study_ids from the exposure search
+#		as pass them on to the Subject search.
+
+		@search = Subject.search do
 			keywords params[:q]
 #	undefined method `name' for "Book":String 
 #	where Book is params[:class]
@@ -19,6 +37,9 @@ class SearchesController < ApplicationController
 #	facet order is preserved, so the order it is listed here
 #		will be the order that it is presented in the view
 
+#
+#	genotypings not desired at the moment.  When it is, just add to the list after biospecimens
+#
 			%w( world_region country study_name recruitment study_design age_group case_status subtype biospecimens ).each do |p|
 				if params[p]
 					if params[p+'_op'] && params[p+'_op']=='AND'
@@ -30,27 +51,9 @@ class SearchesController < ApplicationController
 				facet p.to_sym
 			end
 
-#			dynamic :exposures do
-#				facet 'exposures'
-#"exposures:exposures"=>["tobacco"]
-#				params.each do |key,values|
-#					if key =~ /^exposures:exposures/
-#						with(key.sub(/^exposures:/,'')).any_of values
-#						[values].flatten.each do |value|
-#							facet "#{key.sub(/^exposures:/,'')}:#{value}"
-#						end
-#					end
-#				end
-#			end
-
 ##	what about principle investigators?
 
-#
-#	Not desired at the moment.  When it is, just add to the list after biospecimens
-#
-##			with(:genotypings).any_of params[:genotypings]	if params[:genotypings]
-##			facet :genotypings
-
+			with( :study_id ).any_of( study_ids ) if params[:category]
 			facet :study_id
 
 			order_by :created_at, :asc
@@ -77,40 +80,4 @@ CASE STATUS
 			Low hyperdiploid
 			Hypodiploid
 			Other
-BIOSPECIMENS
-	Case
-		Child
-			Dried Blood Spot
-			Bone Marrow
-			Pre-treatment Blood
-			Blood
-			Buccal
-		Maternal
-			Blood
-			Buccal
-		Paternal
-			Blood
-			Buccal
-	Control
-		Child
-			Dried Blood Spot
-			Blood
-			Buccal
-			Saliva
-		Maternal
-			Blood
-			Buccal
-			Saliva
-		Paternal
-			Blood
-			Buccal
-			Saliva
-GENOTYPING
-	Phase I Metabolism
-	Phase II Metabolism
-	Immune Function
-	Folate Metabolism
-	DNA Repair
-	Oxidative Stress
-	Other
 

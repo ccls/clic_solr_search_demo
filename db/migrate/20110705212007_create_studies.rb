@@ -12,8 +12,6 @@ class CreateStudies < ActiveRecord::Migration
 			t.string :method_cytogenetic_subtyping
 			t.string :location_cytogenetic_subtyping
 			t.text :overview
-#	add here and remove separate migration if ever revert to beginning
-#			t.text :exposures
 			t.timestamps
 		end
 	end

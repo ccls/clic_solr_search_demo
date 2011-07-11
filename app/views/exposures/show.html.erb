@@ -1,0 +1,33 @@
+<p>
+  <b>Study:</b>
+  <%=h @exposure.study_id %>
+</p>
+
+<p>
+  <b>Klass:</b>
+  <%=h @exposure.klass %>
+</p>
+
+<p>
+  <b>Relations:</b>
+  <%=h @exposure.relations %>
+</p>
+
+<p>
+  <b>Windows:</b>
+  <%=h @exposure.windows %>
+</p>
+
+<p>
+  <b>Types:</b>
+  <%=h @exposure.types %>
+</p>
+
+<p>
+  <b>Assessments:</b>
+  <%=h @exposure.assessments %>
+</p>
+
+
+<%= link_to 'Edit', edit_exposure_path(@exposure) %> |
+<%= link_to 'Back', exposures_path %>

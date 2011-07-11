@@ -12,7 +12,6 @@
     <th>Recruitment</th>
     <th>Method Cytogenetic Subtyping</th>
     <th>Location Cytogenetic Subtyping</th>
-    <th>Overview</th>
   </tr>
 
 <% @studies.each do |study| %>
@@ -27,7 +26,6 @@
     <td><%=h study.recruitment %></td>
     <td><%#=h study.method_cytogenetic_subtyping %></td>
     <td><%#=h study.location_cytogenetic_subtyping %></td>
-    <td><%=h study.overview %></td>
     <td><%= link_to 'Show', study %></td>
     <td><%= link_to 'Edit', edit_study_path(study) %></td>
     <td><%= link_to 'Destroy', study, :confirm => 'Are you sure?', :method => :delete %></td>

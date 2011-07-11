@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :exposures
+
   map.resources :studies
   map.resources :subjects
 

@@ -27,30 +27,19 @@ No good data at the moment
    <% @search.facets.each do |facet| -%>
     <% next if facet.name.to_s == 'study_id' -%><%# don't show the study_id facet -%>
     <% next if facet.rows.empty? -%><%# don't show empty facets -%>
-    <b><%= pluralize(facet.rows.length,facet.name.to_s.titleize) %></b>
-
-<% if [:biospecimens,:genotypings].include?(facet.name) %>
-<%# ONLY for biospecimens %>
-<div>Multi-select operator
-<%= radio_button_tag "#{facet.name}_op", 'AND',
-  ( params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'AND' ) %>
-<label for='<%="#{facet.name}_op_and"-%>'>AND</label>
-<%= radio_button_tag "#{facet.name}_op", 'OR',
-	( params["#{facet.name}_op"].blank? || params["#{facet.name}_op"] && params["#{facet.name}_op"] == 'OR' ) %>
-<label for='<%="#{facet.name}_op_or"-%>'>OR</label>
-</div>
-<% end %><%# if facet.name == :biospecimens %>
-
-    <ul id='<%=facet.name-%>' class='facet_field'>
-     <% facet.rows.each do |row| -%>
-      <li>
-<%= check_box_tag "#{facet.name}[]", row.value, params[facet.name].include?(row.value),
- { :id => "#{facet.name}_#{row.value.html_friendly}" } 
-%><label for='<%="#{facet.name}_#{row.value.html_friendly}"-%>'><span><%= row.value %></span>
-&nbsp;(&nbsp;<%= row.count %>&nbsp;)</label</li>
-     <% end -%>
-    </ul>
+    <%= facet_for(facet,
+        :multiselector => [:biospecimens,:genotypings].include?(facet.name),
+        :facet_counts  => true ) %>
    <% end -%>
+
+<hr/>
+   <h2>Exposure Study Filter</h2>
+   <% @exposure_search.facets.each do |facet| -%>
+    <% next if facet.name.to_s == 'study_id' -%><%# don't show the study_id facet -%>
+    <% next if facet.rows.empty? -%><%# don't show empty facets -%>
+    <%= facet_for(facet, :radio => (facet.name.to_s == 'category') ) %>
+   <% end -%>
+
    <%= submit_tag "Search", :name => nil %>
   <% end -%>
   <p>TODO: remember selected tab (not terribly important)</p>
