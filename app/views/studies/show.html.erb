@@ -52,3 +52,24 @@
   <b>Overview:</b>
   <%=h @study.overview %>
 </p>
+
+<% unless @study.exposures.empty? %>
+<h4>Exposures</h4>
+<table id='study_exposures'>
+  <tr>
+    <th>Category</th>
+    <th>Relation to Child</th>
+    <th>Windows of Exposure</th>
+    <th>Types</th>
+  </tr>
+
+<% @study.exposures.each do |exposure| %>
+  <tr>
+    <td class='center'><%=h exposure.category %></td>
+    <td class='center'><%=h exposure.relation_to_child %></td>
+    <td><%= exposure.windows_of_exposure.join('<br/>') %></td>
+    <td><%= exposure.types.join('<br/>') %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>

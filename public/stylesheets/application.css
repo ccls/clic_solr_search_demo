@@ -49,20 +49,44 @@
 #tabs {
 	border-bottom: 1px solid gray;
 }
+#tabs ul {
+	margin-bottom: 5px;
+}
 #tabs ul li {
 	display:inline;
 }
 #tabs ul li a {
 	text-decoration:none;
-	padding:5px;
+	padding: 5px 15px;
 	font-size:12pt;
 	font-weight:bold;
 	background-color:silver;
 	color:black;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+
+	/* http://css-radius.heroku.com */
+	-webkit-border-radius: 8px 8px 0px 0px;
+	-moz-border-radius: 8px 8px 0px 0px;
+	border-radius: 8px 8px 0px 0px;
+
+/* for webkit browsers */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#BBBBBB)); 
+/* for firefox 3.6+  */
+	background-image: -moz-linear-gradient(top,  #FFFFFF,  #BBBBBB); 
+/* for ie , but doesn't seem to work as expected despite other examples working */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#FFFFFF', EndColorStr='#BBBBBB');
 }
 #tabs ul li a.current {
 	background-color:gray;
 	color:white;
+/* for webkit browsers */
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#888888), to(#BBBBBB)); 
+/* for firefox 3.6+  */
+	background-image: -moz-linear-gradient(top,  #888888,  #BBBBBB); 
+/* for ie , but doesn't seem to work as expected despite other examples working */
+	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#888888', EndColorStr='#BBBBBB');
 }
 #studies {
 	display:none;	/* hide initially */
@@ -72,4 +96,17 @@
 }
 #pubmed {
 	display:none;	/* hide initially */
+}
+
+
+table#study_exposures {
+	width:100%;
+	border-collapse:collapse; // key to having table row border
+}
+table#study_exposures tr {
+	border: 1px solid gray;
+}
+table#study_exposures th,
+table#study_exposures td.center {
+	text-align: center;
 }
