@@ -9,6 +9,8 @@ class Exposure < ActiveRecord::Base
 	serialize( :frequencies_of_contact, Array )
 	serialize( :frequencies_of_use, Array )
 	serialize( :durations_of_use, Array )
+
+#	not yet imported
 	serialize( :doses_assessed, Array )
 
 	# can't use macro style setup for after_find or after_initialize
@@ -29,8 +31,12 @@ class Exposure < ActiveRecord::Base
 		self.frequencies_of_use = Array.new if self.frequencies_of_use.nil?
 		# set durations_of_use default to empty Array
 		self.durations_of_use = Array.new if self.durations_of_use.nil?
+
+
 		# set doses_assessed default to empty Array
 		self.doses_assessed = Array.new if self.doses_assessed.nil?
+
+
 	end
 
 	searchable do 
@@ -45,7 +51,11 @@ class Exposure < ActiveRecord::Base
 		string :frequencies_of_contact, :multiple => true
 		string :frequencies_of_use, :multiple => true
 		string :durations_of_use, :multiple => true
+
+
 #		string :doses_assessed, :multiple => true
+
+
 	end
 
 end
