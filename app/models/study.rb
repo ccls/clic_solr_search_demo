@@ -2,6 +2,7 @@ class Study < ActiveRecord::Base
 
 	has_many :subjects
 	has_many :exposures
+	has_many :questions
 
 #	serialize :exposures, Hash
 

@@ -1,20 +1,25 @@
 require 'fastercsv'
 namespace :app do
 
+	desc "Destroy and re-import the subjects and exposures from csv files."
 	task :import => [ :import_subjects, :import_exposures ]
 
+	desc "Destroy and re-import the exposures from csv files."
 	task :import_exposures => [:destroy_exposures,
 		:import_tobacco, :import_pesticides, :import_vitamins]
 
+	desc "Destroy all the existing exposures."
 	task :destroy_exposures => :environment do
 		Exposure.destroy_all
 	end
 
+	desc "Destroy all the existing studies, subjects and exposures."
 	task :destroy_all => :destroy_exposures do
 		Study.destroy_all
 		Subject.destroy_all
 	end
 
+	desc "Import the vitamins exposures from csv file."
 	task :import_vitamins => :environment do
 #	"Study","Relation to Child","Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Folate/Folic Acid","Vitamin A","Beta-carotene","B-complex Vitamins","Vitamin C","Vitamin E","Vitamin Complex","Iron","Calcium","Zinc","Selenium","Antioxidant Combination","Prenatal","Multi Vitamin","Any Vitamin, Mineral, or Dietary Supplements","Brand Name","Fill in the Blank","Days/Week","Times/Day","Times/Week","Times/Month","Times/Year","Number of Weeks","Number of Months","Number of Years","Ages","Dose Assessed"
 #	"Australia-ALL","Mother",1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,1
@@ -43,6 +48,7 @@ namespace :app do
 		end
 	end
 
+	desc "Import the pesticides exposures from csv file."
 	task :import_pesticides => :environment do
 #	remove this first line
 #	,,"Windows of Exposure",,,,,"Type",,,,,,,"Form of Contact",,,,,"Location of Use",,,,,,"Frequency of Contact Assessment",,,,
@@ -73,6 +79,7 @@ namespace :app do
 		end
 	end
 
+	desc "Import the tobacco exposures from csv file."
 	task :import_tobacco => :environment do
 #	"Study",
 #		"Relation to Child",
@@ -102,6 +109,7 @@ namespace :app do
 		end
 	end
 
+	desc "Destroy and re-import the subjects from csv file."
 	task :import_subjects => :destroy_all do
 
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
