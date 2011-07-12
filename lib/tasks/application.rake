@@ -1,6 +1,11 @@
 require 'fastercsv'
 namespace :app do
 
+	task :import => [ :import_subjects, :import_exposures ]
+
+	task :import_exposures => [:destroy_exposures,
+		:import_tobacco, :import_pesticides, :import_vitamins]
+
 	task :destroy_exposures => :environment do
 		Exposure.destroy_all
 	end
@@ -9,9 +14,6 @@ namespace :app do
 		Study.destroy_all
 		Subject.destroy_all
 	end
-
-	task :import_exposures => [:destroy_exposures,
-		:import_tobacco,:import_pesticides,:import_vitamins]
 
 	task :import_vitamins => :environment do
 #	"Study","Relation to Child","Preconception","Pregnancy","Trimester","Postnatal","Breastfeeding","Folate/Folic Acid","Vitamin A","Beta-carotene","B-complex Vitamins","Vitamin C","Vitamin E","Vitamin Complex","Iron","Calcium","Zinc","Selenium","Antioxidant Combination","Prenatal","Multi Vitamin","Any Vitamin, Mineral, or Dietary Supplements","Brand Name","Fill in the Blank","Days/Week","Times/Day","Times/Week","Times/Month","Times/Year","Number of Weeks","Number of Months","Number of Years","Ages","Dose Assessed"
