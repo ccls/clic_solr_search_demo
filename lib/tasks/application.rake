@@ -22,7 +22,7 @@ namespace :app do
 
 
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
-		(f=FasterCSV.open("Vitamin-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
+		(f=FasterCSV.open("DB_Mid-level Groupings_101110_HR-Vitamin.csv", 'rb',{
 			:headers => true })).each do |line|
 			puts "Processing line #{f.lineno}:#{line['Study']}"
 
@@ -52,7 +52,7 @@ namespace :app do
 
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
 #		(f=FasterCSV.open("TobaccoMid-levelGroupings_100410_HR.csv", 'rb',{
-		(f=FasterCSV.open("Pesticide-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
+		(f=FasterCSV.open("DB_Mid-level Groupings_101110_HR-Pesticide.csv", 'rb',{
 			:headers => true })).each do |line|
 			puts "Processing line #{f.lineno}:#{line['Study']}"
 
@@ -83,7 +83,7 @@ namespace :app do
 #	"Brazil","Mother",1,0,0,0,0,0,0,1,0,0,0,0,0,1,1
 
 		#	DO NOT COMMENT OUT THE HEADER LINE OR IT RAISES CRYPTIC ERROR
-		(f=FasterCSV.open("Tobacco-DB_Mid-level Groupings_101110_HR.csv", 'rb',{
+		(f=FasterCSV.open("DB_Mid-level Groupings_101110_HR-Tobacco.csv", 'rb',{
 			:headers => true })).each do |line|
 			puts "Processing line #{f.lineno}:#{line['Study']}"
 
