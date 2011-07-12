@@ -10,7 +10,7 @@ class Exposure < ActiveRecord::Base
 	serialize( :frequencies_of_use, Array )
 	serialize( :durations_of_use, Array )
 
-#	not yet imported
+#	NOTE not yet imported
 	serialize( :doses_assessed, Array )
 
 	# can't use macro style setup for after_find or after_initialize

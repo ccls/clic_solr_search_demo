@@ -59,18 +59,11 @@ class Subject < ActiveRecord::Base
 		boolean :cytogenetics_hypodiploid
 		boolean :cytogenetics_other
 
-#
-#	There's gotta be a better way
-#
-#		dynamic_string :exposures, :multiple => true do
-#			study.facetized_exposures
-#		end
-
 		time :created_at
 		time :updated_at
 	end
 
 	def to_s
-		"#{subid} : #{case_status} : #{subtype}"
+		"Subject: #{subid} : #{case_status} : #{subtype}"
 	end
 end
