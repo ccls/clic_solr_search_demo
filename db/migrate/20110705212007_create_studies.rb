@@ -11,7 +11,7 @@ class CreateStudies < ActiveRecord::Migration
 			t.string :age_group
 			t.string :method_cytogenetic_subtyping
 			t.string :location_cytogenetic_subtyping
-			t.string :principal_investigator
+			t.text :principal_investigators
 			t.text :overview
 			t.timestamps
 		end

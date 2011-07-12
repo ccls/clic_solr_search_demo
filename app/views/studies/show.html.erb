@@ -40,12 +40,17 @@
 
 <p>
   <b>Method Cytogenetic Subtyping:</b>
-  <%#=h @study.method_cytogenetic_subtyping %>
+  <%=h @study.method_cytogenetic_subtyping %>
 </p>
 
 <p>
   <b>Location Cytogenetic Subtyping:</b>
-  <%#=h @study.location_cytogenetic_subtyping %>
+  <%=h @study.location_cytogenetic_subtyping %>
+</p>
+
+<p>
+  <b>Principal Investigators:</b>
+  <%=h @study.principal_investigators.join(', ') %>
 </p>
 
 <p>

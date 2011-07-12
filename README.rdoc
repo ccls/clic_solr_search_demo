@@ -17,69 +17,10 @@ you'll get ...
  rake db:migrate
  rake sunspot:solr:start
  rake app:import
- rake db:fixtures:load FIXTURES=studies
+ rake sunspot:solr:reindex
  script/server
 
 
-== Exposures Issues
- 
-  class Study < ActiveRecord::Base
- 	  has_many :subjects
-    #
-    #  Study has attribute 'exposures' as text field which is used to hold 
-    #  an array of hashes containing the attributes for a given 
-    #  exposure (:classification,:type,:relation_to_subject,:time_of_exposure,:assessment)
-    serialize :exposures, Array
-    #  This could also be in the db separately if a model called Exposure were created.
-    #  has_many :exposures
-  end
- 
-  class Subject < ActiveRecord::Base
-    belongs_to :study
-    delegate :study_name, :country, :to => :study
-    searchable do
-      integer :study_id, :references => Study
-      string :study_name
-      string :country
-      integer :subid
-      string :case_status
-      string :subtype
-
-      # what magic goes here to add the study's exposures
-      # to subject searching?
-
-    end
-  end
- 
-  class SearchesController < ApplicationController
-    def show
-      @search = Subject.search do
-        with  :study_name, params[:study_name] if params[:study_name]
-        facet :study_name
-        with  :country, params[:country] if params[:country]
-        facet :country
-
-        # what magic goes here to 'with' and 'facet' on
-        # the study exposures fields?
-
-      end
-		end
-  end
-
-How to search for subjects that are in a study that has an exposure with 'Mother' as a relation_to_subject?  As is just one of the attributes, should be pretty straight forward.
-
-However, how facet on the other fields with 'Mother' as a relation_to_subject?
-
-How to search for subjects that are in a study that has an exposure with 'Mother' as relation AND 'classification' of 'tobacco'?
-
-How to search for subjects that are in a study that has an exposure with 'Mother' as relation AND 'classification' of 'tobacco' AND an exposure with 'Mother' as relation AND classification of 'pesticide'?
-
-Perhaps, I'll have to setup Exposure as being searchable and then do an Exposure search first to acquire study_ids with which to filter the Subject search.
-
-
-from http://groups.google.com/group/ruby-sunspot/browse_thread/thread/605511a0caa5fc17
-... to index a field containing both the make and model, as well as a field containing only the make, and then arrange the facets in your application code to provide the UI
- 
  
 == Original PHP App Notes
 

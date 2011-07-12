@@ -4,6 +4,8 @@ studies_7:
   country: France
   world_region: EUROPE
   study_name: France - ESCALE
+  principal_investigators: 
+    - Jacqueline Clavel
   overview: |-
     Principal Investigator: Jacqueline Clavel
     
@@ -29,6 +31,8 @@ studies_8:
   country: Greece
   world_region: EUROPE
   study_name: Greece
+  principal_investigators: 
+    - Eleni Petridou
   overview: |-
     Principal Investigator: Eleni Petridou
     
@@ -56,6 +60,8 @@ studies_10:
   country: Korea
   world_region: ASIA
   study_name: Korea
+  principal_investigators: 
+    - Daehee Kang
   overview: |-
     Principal Investigator: Daehee Kang
     
@@ -81,6 +87,8 @@ studies_9:
   country: Italy
   world_region: EUROPE
   study_name: Italy
+  principal_investigators: 
+    - Corrado Magnani
   overview: |-
     Principal Investigator: Corrado Magnani
     
@@ -111,6 +119,9 @@ studies_11:
   country: UK
   world_region: EUROPE
   study_name: Manchester, UK
+  principal_investigators: 
+    - Jillian M. Birch
+    - Malcolm Taylor
   overview: |-
     Principal Investigator: Jillian M. Birch, Malcolm Taylor
     
@@ -134,6 +145,8 @@ studies_12:
   country: New Zealand
   world_region: OCEANA
   study_name: New Zealand
+  principal_investigators: 
+    - John D Dockerty
   overview: |-
     Principal Investigator: John D Dockerty
     
@@ -159,6 +172,9 @@ studies_1:
   country: Australia
   world_region: OCEANA
   study_name: AUS-ALL
+  principal_investigators: 
+    - Bruce Armstrong
+    - Elizabeth Milne
   overview: |-
     Principal Investigators: Bruce Armstrong, Elizabeth Milne
     
@@ -183,6 +199,8 @@ studies_13:
   country: Canada
   world_region: AMERICAS
   study_name: Quebec
+  principal_investigators: 
+    - Claire Infante-Rivard
   overview: |-
     Principal Investigator: Claire Infante-Rivard
     
@@ -202,6 +220,8 @@ studies_2:
   country: Brazil
   world_region: AMERICAS
   study_name: Brazil
+  principal_investigators: 
+    - Maria S. Pombo-de-Oliveira
   overview: |-
     Principal Investigator: Maria S. Pombo-de-Oliveira
     
@@ -222,6 +242,8 @@ studies_14:
   country: Canada
   world_region: AMERICAS
   study_name: Qc-ALL
+  principal_investigators: 
+    - Daniel Sinnett
   overview: |-
     Principal Investigator: Daniel Sinnett
     
@@ -246,6 +268,8 @@ studies_3:
   country: US
   world_region: AMERICAS
   study_name: CCLS
+  principal_investigators: 
+    - Patricia Buffler
   overview: |-
     Principal Investigator: Patricia Buffler
     
@@ -271,6 +295,8 @@ studies_15:
   country: UK
   world_region: EUROPE
   study_name: UKCCS
+  principal_investigators: 
+    - Eve Roman
   overview: |-
     Principal Investigator: Eve Roman
     
@@ -296,6 +322,8 @@ studies_4:
   country: Costa Rica
   world_region: AMERICAS
   study_name: Costa Rica
+  principal_investigators: 
+    - Patricia Monge
   overview: |-
     Principal Investigator: Patricia Monge
     
@@ -315,6 +343,8 @@ studies_16:
   country: Germany
   world_region: EUROPE
   study_name: Germany
+  principal_investigators: 
+    - Peter Kaatsch
   overview: |-
     Principal Investigator: Peter Kaatsch
     
@@ -340,6 +370,8 @@ studies_5:
   country: France
   world_region: EUROPE
   study_name: France - ADELE
+  principal_investigators: 
+    - Jacqueline Clavel
   overview: |-
     Principal Investigator: Jacqueline Clavel
     
@@ -365,6 +397,8 @@ studies_17:
   country: UK
   world_region: EUROPE
   study_name: CCRG
+  principal_investigators: 
+    - Michael Murphy
   overview: |-
     Principal Investigator: Michael Murphy
     
@@ -381,6 +415,8 @@ studies_6:
   country: France
   world_region: EUROPE
   study_name: France - ELECTRE
+  principal_investigators: 
+    - Jacqueline Clavel
   overview: |-
     Principal Investigator: Jacqueline Clavel
     

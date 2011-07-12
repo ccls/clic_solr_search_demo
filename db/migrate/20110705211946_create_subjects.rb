@@ -4,37 +4,9 @@ class CreateSubjects < ActiveRecord::Migration
 			t.integer :study_id
 			t.integer :subid
 			t.string :case_status
-#			t.string :method_cytogenetic_subtyping
-#			t.string :location_cytogenetic_subtyping
 			t.string :subtype
 			t.string :sex     #	pending
 			t.string :race    #	pending
-#			t.boolean :case_DBS
-#			t.boolean :case_BM
-#			t.boolean :case_pretreat_blood
-#			t.boolean :case_blood
-#			t.boolean :case_buccal
-#			t.boolean :case_maternal_blood
-#			t.boolean :case_paternal_blood
-#			t.boolean :case_maternal_buccal
-#			t.boolean :case_paternal_buccal
-#			t.boolean :control_DBS
-#			t.boolean :control_blood
-#			t.boolean :control_buccal
-#			t.boolean :control_saliva
-#			t.boolean :control_maternal_blood
-#			t.boolean :control_paternal_blood
-#			t.boolean :control_maternal_buccal
-#			t.boolean :control_paternal_buccal
-#			t.boolean :control_maternal_saliva
-#			t.boolean :control_paternal_saliva
-#			t.boolean :genotyping_phase_I_metabolic
-#			t.boolean :genotyping_phase_II_metabolic
-#			t.boolean :genotyping_DNA_repair
-#			t.boolean :genotyping_immune_function
-#			t.boolean :genotyping_oxidative_stress
-#			t.boolean :genotyping_folate_metabolism
-#			t.boolean :genotyping_other
 			t.boolean :cytogenetics_t_12_21
 			t.boolean :cytogenetics_inv_16
 			t.boolean :cytogenetics_t_1_19
@@ -50,7 +22,6 @@ class CreateSubjects < ActiveRecord::Migration
 			t.boolean :cytogenetics_other
 			t.text :biospecimens
 			t.text :genotypings
-
 			t.timestamps
 		end
 	end

@@ -19,8 +19,9 @@ class Subject < ActiveRecord::Base
 		:study_design,
 		:ascertainment,
 		:age_group,
-#		:method_cytogenetic_subtyping,
-#		:location_cytogenetic_subtyping,
+		:method_cytogenetic_subtyping,
+		:location_cytogenetic_subtyping,
+		:principal_investigators,
 		:recruitment, :to => :study, :allow_nil => true
 
 	searchable do 
@@ -34,8 +35,9 @@ class Subject < ActiveRecord::Base
 		string :age_group
 		string :recruitment
 
-#		string :method_cytogenetic_subtyping			#	may be more study related
-#		string :location_cytogenetic_subtyping		#	may be more study related
+		string :method_cytogenetic_subtyping
+		string :location_cytogenetic_subtyping
+		string :principal_investigators,  :multiple => true
 
 		integer :subid
 		string :case_status
