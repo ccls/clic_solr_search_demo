@@ -1,0 +1,58 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>Study</th>
+    <th>Relation</th>
+    <th>Time period</th>
+    <th>Category</th>
+    <th>Subcategory</th>
+    <th>Level of assessment</th>
+    <th>Type</th>
+    <th>Body</th>
+    <th>Subquestion</th>
+    <th>Primary response</th>
+    <th>Secondary question</th>
+    <th>Secondary response</th>
+    <th>Tertiary question</th>
+    <th>Tertiary response</th>
+    <th>Quartary question</th>
+    <th>Quartary response</th>
+    <th>Answers</th>
+    <th>Standard</th>
+    <th>Data available</th>
+    <th>Time period notes</th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%=h question.study_id %></td>
+    <td><%=h question.relation %></td>
+    <td><%=h question.time_period %></td>
+    <td><%=h question.category %></td>
+    <td><%=h question.subcategory %></td>
+    <td><%=h question.level_of_assessment %></td>
+    <td><%=h question.type %></td>
+    <td><%=h question.body %></td>
+    <td><%=h question.subquestion %></td>
+    <td><%=h question.primary_response %></td>
+    <td><%=h question.secondary_question %></td>
+    <td><%=h question.secondary_response %></td>
+    <td><%=h question.tertiary_question %></td>
+    <td><%=h question.tertiary_response %></td>
+    <td><%=h question.quartary_question %></td>
+    <td><%=h question.quartary_response %></td>
+    <td><%=h question.answers %></td>
+    <td><%=h question.standard %></td>
+    <td><%=h question.data_available %></td>
+    <td><%=h question.time_period_notes %></td>
+    <td><%= link_to 'Show', question %></td>
+    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+    <td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New question', new_question_path %>

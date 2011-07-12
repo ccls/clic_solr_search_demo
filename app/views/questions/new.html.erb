@@ -1,0 +1,91 @@
+<h1>New question</h1>
+
+<% form_for(@question) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :study_id %><br />
+    <%= f.text_field :study_id %>
+  </p>
+  <p>
+    <%= f.label :relation %><br />
+    <%= f.text_field :relation %>
+  </p>
+  <p>
+    <%= f.label :time_period %><br />
+    <%= f.text_field :time_period %>
+  </p>
+  <p>
+    <%= f.label :category %><br />
+    <%= f.text_field :category %>
+  </p>
+  <p>
+    <%= f.label :subcategory %><br />
+    <%= f.text_field :subcategory %>
+  </p>
+  <p>
+    <%= f.label :level_of_assessment %><br />
+    <%= f.text_field :level_of_assessment %>
+  </p>
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.label :subquestion %><br />
+    <%= f.text_area :subquestion %>
+  </p>
+  <p>
+    <%= f.label :primary_response %><br />
+    <%= f.text_field :primary_response %>
+  </p>
+  <p>
+    <%= f.label :secondary_question %><br />
+    <%= f.text_area :secondary_question %>
+  </p>
+  <p>
+    <%= f.label :secondary_response %><br />
+    <%= f.text_field :secondary_response %>
+  </p>
+  <p>
+    <%= f.label :tertiary_question %><br />
+    <%= f.text_area :tertiary_question %>
+  </p>
+  <p>
+    <%= f.label :tertiary_response %><br />
+    <%= f.text_field :tertiary_response %>
+  </p>
+  <p>
+    <%= f.label :quartary_question %><br />
+    <%= f.text_area :quartary_question %>
+  </p>
+  <p>
+    <%= f.label :quartary_response %><br />
+    <%= f.text_field :quartary_response %>
+  </p>
+  <p>
+    <%= f.label :answers %><br />
+    <%= f.text_area :answers %>
+  </p>
+  <p>
+    <%= f.label :standard %><br />
+    <%= f.text_field :standard %>
+  </p>
+  <p>
+    <%= f.label :data_available %><br />
+    <%= f.check_box :data_available %>
+  </p>
+  <p>
+    <%= f.label :time_period_notes %><br />
+    <%= f.text_area :time_period_notes %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', questions_path %>
