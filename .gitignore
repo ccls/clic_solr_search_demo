@@ -7,3 +7,4 @@ db/schema.rb
 solr/
 tmp/*
 clic_solr.war
+/config/s3.yml
