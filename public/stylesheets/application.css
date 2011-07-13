@@ -2,7 +2,6 @@
 	width:100%;
 	display:table;
 	border-collapse:collapse; /* key to having table row border */
-	background-color: #DDF;
 }
 #results_wrapper {
 	border: 1px solid #EEE;
@@ -13,6 +12,7 @@
 	display:table-cell;
 	border-right: 2px solid silver;
 	padding: 0 10px;
+	background-color: #DDF;
 }
 #facets form input[type=submit] {
 	font-size:16pt;
@@ -110,7 +110,7 @@ ul.results li:nth-child(2n+1) { background-color: #DDD; }
 	float:right;
 }
 
-#studies {
+#subjects {
 	display:none;	/* hide initially */
 }
 #questions {

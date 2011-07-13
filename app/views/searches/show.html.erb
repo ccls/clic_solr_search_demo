@@ -64,12 +64,23 @@ No good data at the moment
 
   <div id='tabs'>
    <ul>
-    <li class='subjects'><a href='javascript:void()' class='current'>Subjects</a></li>
-    <li class='studies'><a href='javascript:void()'>Studies</a></li>
+    <li class='studies'><a href='javascript:void()' class='current'>Studies</a></li>
+    <li class='subjects'><a href='javascript:void()'>Subjects</a></li>
     <li class='questions'><a href='javascript:void()'>Questions</a></li>
     <li class='pubmed'><a href='javascript:void()'>PubMed</a></li>
    </ul>
   </div><!-- id='tabs' -->
+
+  <div id='studies' class='tab_contents'>
+   <ul class='results'>
+    <% @search.facet(:study_id).rows.each do |row| %>
+     <li class='result'>
+<span class='study'><%= link_to row.instance.study_name, study_path(row.value) %></span>
+<span class='count'>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</span>
+     </li>
+    <% end %>
+   </ul>
+  </div><!-- id='studies' -->
 
   <div id='subjects' class='tab_contents'>
    <% unless @search.results.empty? %>
@@ -85,17 +96,6 @@ No good data at the moment
    <p><%= will_paginate(@search.hits) %></p>
    <p class='page_info'>Displaying page <%=@search.hits.current_page%> of <%=@search.hits.total_pages%> out of <%=@search.total%> results</p>
   </div><!-- id='subjects' -->
-
-  <div id='studies' class='tab_contents'>
-   <ul class='results'>
-    <% @search.facet(:study_id).rows.each do |row| %>
-     <li class='result'>
-<span class='study'><%= link_to row.instance.study_name, study_path(row.value) %></span>
-<span class='count'>&nbsp;(&nbsp;<%= row.count %>&nbsp;)</span>
-     </li>
-    <% end %>
-   </ul>
-  </div><!-- id='studies' -->
 
   <div id='questions' class='tab_contents'>
    <h1>Pending</h1>
