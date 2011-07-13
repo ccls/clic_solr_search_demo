@@ -21,6 +21,29 @@ you'll get ...
  script/server
 
 
+
+== Data Import Notes
+
+Fix study name inconsistencies...
+
+ vi DB_DataDict_DB_110410_CM-*csv
+
+ :bufdo :%s/ADELE (France)/France - ADELE/g|:up
+ :bufdo :%s/ELECTRE (France)/France - ELECTRE/g|:up
+ :bufdo :%s/ESCALE (France)/France - ESCALE/g|:up
+ :bufdo :%s/Australia-ALL/AUS-ALL/g|:up
+ :bufdo :%s/Brazil-IAL/Brazil/g|:up
+ :bufdo :%s/CCRG, UK/CCRG/g|:up
+ :bufdo :%s/Costa Rica Study/Costa Rica/g|:up
+ :bufdo :%s/NaReCHem (Greece)/Greece/g|:up
+ :bufdo :%s/Manchester, UK Study/Manchester, UK/g|:up
+ :bufdo :%s/Italy Study/Italy/g|:up
+ :bufdo :%s/New Zealand Study/New Zealand/g|:up
+ :bufdo :%s/Quebec Study/Quebec/g|:up
+ :bufdo :%s/Seoul Study/Korea/g|:up
+ :bufdo :%s/QcALL Study\*/Qc-ALL/g|:up
+ :bufdo :%s/GCCR/Germany/g|:up
+
  
 == Original PHP App Notes
 
