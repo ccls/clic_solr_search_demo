@@ -1,7 +1,8 @@
 #content {
 	width:100%;
 	display:table;
-	border-collapse:collapse; // key to having table row border
+	border-collapse:collapse; /* key to having table row border */
+	background-color: #DDF;
 }
 #results_wrapper {
 	border: 1px solid #EEE;
@@ -41,6 +42,7 @@
 #results {
 	padding: 0 10px;
 	display:table-cell;
+	background-color: #FFF;
 }
 #filters {
 	padding: 0 10px;
@@ -88,6 +90,26 @@
 /* for ie , but doesn't seem to work as expected despite other examples working */
 	filter: progid:DXImageTransform.Microsoft.gradient(StartColorStr='#888888', EndColorStr='#BBBBBB');
 }
+ul.results {
+	list-style: none;
+	padding-left: 10px;
+}
+ul.results li {
+	border:1px solid silver;
+	border-top: 0px;
+	padding: 4px 5px;
+}
+ul.results li:nth-child(1) {
+	border-top:1px solid silver;
+}
+ul.results li:nth-child(2n)   { background-color: #EEE; }
+ul.results li:nth-child(2n+1) { background-color: #DDD; }
+#subjects ul.results li span.subject {
+}
+#subjects ul.results li span.study {
+	float:right;
+}
+
 #studies {
 	display:none;	/* hide initially */
 }
