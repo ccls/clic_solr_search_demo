@@ -6,7 +6,15 @@ RAILS_GEM_VERSION = '2.3.12' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+#	This constant is used in the ucb_ccls_engine#Document
+#	and other places like Amazon buckets
+#	for controlling the path to documents and other files.
+RAILS_APP_NAME = 'clic'	
+#	This is the same as the clic app.
+#	I hope that it doesn't cause any issues.
+
 Rails::Initializer.run do |config|
+	config.gem "aws-s3", :lib => "aws/s3"
 	config.gem "sunspot_rails"
 	config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list'
 	config.gem 'will_paginate'

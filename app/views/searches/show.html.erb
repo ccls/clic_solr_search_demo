@@ -19,6 +19,10 @@ No good data at the moment
 
 <div id='results_wrapper'>
  <div id='facets'>
+<div id="logo">
+<%= aws_image_tag('clic_logo.gif') %>
+</div>
+
   <% form_tag( search_path, :method => :get ) do %>
    <%= submit_tag "Search", :name => nil %>
    <p>

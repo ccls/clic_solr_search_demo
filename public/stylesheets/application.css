@@ -48,6 +48,10 @@
 	padding: 0 10px;
 	border: 1px solid gray;
 }
+#filters h3 {
+	margin-top:0;
+	padding-top:10px;
+}
 #tabs {
 	border-bottom: 1px solid gray;
 }
@@ -99,16 +103,11 @@ ul.results li {
 	border-top: 0px;
 	padding: 4px 5px;
 }
-ul.results li:nth-child(1) {
-	border-top:1px solid silver;
-}
+ul.results li:nth-child(1)    { border-top:1px solid silver; }
 ul.results li:nth-child(2n)   { background-color: #EEE; }
 ul.results li:nth-child(2n+1) { background-color: #DDD; }
-#subjects ul.results li span.subject {
-}
-#subjects ul.results li span.study {
-	float:right;
-}
+#subjects ul.results li span.subject { }
+#subjects ul.results li span.study { float:right; }
 
 #subjects {
 	display:none;	/* hide initially */
@@ -123,7 +122,7 @@ ul.results li:nth-child(2n+1) { background-color: #DDD; }
 
 table#study_exposures {
 	width:100%;
-	border-collapse:collapse; // key to having table row border
+	border-collapse:collapse; /* key to having table row border */
 }
 table#study_exposures tr {
 	border: 1px solid gray;
@@ -131,4 +130,18 @@ table#study_exposures tr {
 table#study_exposures th,
 table#study_exposures td.center {
 	text-align: center;
+}
+
+
+
+div#logo {
+	clear:both;
+	background-color:white;
+	white-space:pre;
+	text-align:center;
+	margin:0px;
+	margin-bottom:5px;
+	padding:0px;
+	padding-bottom:5px;
+	vertical-align:top;
 }
