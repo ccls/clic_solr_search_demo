@@ -21,6 +21,44 @@ you'll get ...
  script/server
 
 
+== Testing
+
+There isn't any extensive testing yet.  However, ...
+
+Due to the existing of sunspot/solr code, testing can be tricky.  Either don't
+test searching and stub out the functionality to make the app run, then test
+everything else.  OR, start the solr server for the test environment.  I'm 
+going to go with the latter.
+
+ rake sunspot:solr:start RAILS_ENV=test
+
+ # will print something like ...
+
+   	(in /Users/jakewendt/github_repo/ccls/clic_solr_search_demo)
+   	Validating all html with http://localhost/w3c-validator/check
+   	Loaded suite /usr/bin/rake
+   	Started
+
+   	Finished in 0.000297 seconds.
+
+   	0 tests, 0 assertions, 0 failures, 0 errors
+   	/Users/jakewendt/github_repo/ccls/clic_solr_search_demo
+   	Wed Jul 13 10:26:36 -0700 2011
+   	Loaded suite /usr/bin/rake
+   	Started
+
+   	Finished in 0.000345 seconds.
+
+   	0 tests, 0 assertions, 0 failures, 0 errors
+   	/Users/jakewendt/github_repo/ccls/clic_solr_search_demo
+   	Wed Jul 13 10:26:36 -0700 2011
+
+ # I think that this is my doing, but 
+ # I thought that I fixed this somewhere and can't remember.
+ # Don't think that its harmful, just irritating.
+
+ autotest (OR just rake test)
+
 
 == Data Import Notes
 

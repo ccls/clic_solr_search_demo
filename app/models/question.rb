@@ -3,17 +3,16 @@ class Question < ActiveRecord::Base
 
 	searchable do
 		integer :study_id, :references => Study
+		string  :relation
+		string  :time_period
+		string  :category
+		string  :subcategory
+		string  :level_of_assessment
 	end
 
 end
 __END__
 
-			t.integer :study_id
-			t.string  :relation
-			t.string  :time_period
-			t.string  :category
-			t.string  :subcategory
-			t.string  :level_of_assessment
 			t.string  :question_type
 			t.text    :primary_question
 			t.text    :primary_subquestion

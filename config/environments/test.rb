@@ -28,10 +28,6 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 
-
-
-
-
 config.gem "rcov"
 
 #	Without the :lib => false, the 'rake test' actually fails?
@@ -45,4 +41,10 @@ config.gem "thoughtbot-factory_girl",
 	:lib    => "factory_girl",
 	:source => "http://gems.github.com"
 
+#	will print something like ...
+#		"Validating all html with http://localhost/w3c-validator/check"
+#	even when running ...
+#	> script/console test
+#	Irritating, but harmless.
 config.gem 'jakewendt-html_test'
+
