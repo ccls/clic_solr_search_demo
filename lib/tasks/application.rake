@@ -15,7 +15,7 @@ namespace :app do
 
 	desc "Destroy and re-import the studies, subjects, exposures and questions from csv files."
 	task :import => [ :destroy_all, :import_notification,
-		'studies:import','subjects:import', 'exposures:import']	#, 'questions:import' ]
+		'studies:import','subjects:import', 'exposures:import', 'questions:import' ]
 
 end
 
