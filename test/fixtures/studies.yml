@@ -430,3 +430,6 @@ studies_6:
   ascertainment: 
   recruitment: ENDED
   study_design: POPULATION-BASED
+studies_18:
+  id: 18
+  study_name: COG

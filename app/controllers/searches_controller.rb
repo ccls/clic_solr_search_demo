@@ -39,8 +39,9 @@ class SearchesController < ApplicationController
 
 #
 #	genotypings not desired at the moment.  When it is, just add to the list after biospecimens
+#	principal_investigators
 #
-			%w( world_region country study_name recruitment study_design age_group principal_investigators case_status subtype biospecimens ).each do |p|
+			%w( world_region country study_name recruitment study_design age_group case_status subtype biospecimens ).each do |p|
 				if params[p]
 					if params[p+'_op'] && params[p+'_op']=='AND'
 						with(p).all_of params[p]
