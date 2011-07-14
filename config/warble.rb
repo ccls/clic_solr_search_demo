@@ -20,7 +20,7 @@ Warbler::Config.new do |config|
 
 	# Additional files/directories to include, above those in config.dirs
 	# config.includes = FileList["db"]
-	config.includes = FileList["Rakefile"]
+	config.includes = FileList["Rakefile","solr","solr/*","solr/**/*"]
 
 	# Additional files/directories to exclude
 	# config.excludes = FileList["lib/tasks/*"]

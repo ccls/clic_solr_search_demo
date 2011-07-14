@@ -13,7 +13,30 @@ RAILS_APP_NAME = 'clic'
 #	This is the same as the clic app.
 #	I hope that it doesn't cause any issues.
 
+#	In production, using script/console does not properly
+#	set a GEM_PATH, so gems aren't loaded correctly.
+if ENV['RAILS_ENV'] == 'production'
+ENV['GEM_PATH'] = File.expand_path(File.join(File.dirname(__FILE__),'..','gems'))
+end
+
+
 Rails::Initializer.run do |config|
+
+	if RUBY_PLATFORM =~ /java/
+		config.gem 'activerecord-jdbcsqlite3-adapter',
+			:lib => 'active_record/connection_adapters/jdbcsqlite3_adapter'
+#		config.gem 'activerecord-jdbcmysql-adapter',
+#			:lib => 'active_record/connection_adapters/jdbcmysql_adapter'
+#		config.gem 'jdbc-mysql', :lib => 'jdbc/mysql'
+		config.gem 'jdbc-sqlite3', :lib => 'jdbc/sqlite3'
+		config.gem 'jruby-openssl', :lib => 'openssl'
+	else
+#		config.gem 'mysql'
+#		config.gem "sqlite3-ruby", :lib => "sqlite3"
+		config.gem "sqlite3"
+	end
+
+
 	config.gem "aws-s3", :lib => "aws/s3"
 	config.gem "sunspot_rails"
 	config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list'
