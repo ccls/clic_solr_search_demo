@@ -49,10 +49,12 @@ Tomcat will unarchive the war file and DESTROY the existing unarchived version! 
  [jakewendt@ccls-01:~] > sudo /sbin/service tomcat5 start
  [jakewendt@ccls-01:~] > tail -f /var/log/tomcat5/catalina.out
 
- # start sunspot:solr server
+ # start sunspot:solr server (sunspot:solr:start does not work in jruby)
  [jakewendt@ccls-01:~] > sudo su -l tomcat
  [tomcat@ccls-01:~] > cd /var/lib/tomcat5/webapps/clic_solr/WEB-INF
  [tomcat@ccls-01:WEB-INF] > rake sunspot:solr:run RAILS_ENV=production &
+ # log is at /var/lib/tomcat5/webapps/clic_solr/WEB-INF/log/sunspot-solr-production.log
+
 
 
 
