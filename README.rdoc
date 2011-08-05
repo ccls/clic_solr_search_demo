@@ -39,7 +39,7 @@ Tomcat will unarchive the war file and DESTROY the existing unarchived version! 
  [jakewendt@dev : clic_solr_search_demo ]> ssh ccls
  [jakewendt@ccls-01:~]> sudo /sbin/service tomcat5 stop
 
- # copy in new war fail as "tomcat"
+ # copy in new war file as "tomcat"
  [jakewendt@ccls-01:~] > sudo su -l tomcat
  [tomcat@ccls-01:~] > /bin/rm -rf /var/lib/tomcat5/webapps/clic_solr
  [tomcat@ccls-01:~] > cp ~jakewendt/clic_solr.war /var/lib/tomcat5/webapps/
