@@ -37,6 +37,7 @@ Rails::Initializer.run do |config|
 	end
 
 
+	config.gem 'jrails'
 	config.gem "aws-s3", :lib => "aws/s3"
 	config.gem "sunspot_rails"
 	config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list'

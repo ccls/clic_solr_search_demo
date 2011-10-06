@@ -46,5 +46,5 @@ config.gem "thoughtbot-factory_girl",
 #	even when running ...
 #	> script/console test
 #	Irritating, but harmless.
-config.gem 'jakewendt-html_test'
+config.gem 'ccls-html_test'
 
