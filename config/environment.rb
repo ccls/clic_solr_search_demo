@@ -42,9 +42,10 @@ Rails::Initializer.run do |config|
 	config.gem "sunspot_rails"
 	config.gem 'ryanb-acts-as-list', :lib => 'acts_as_list'
 	config.gem 'will_paginate'
-	config.gem 'ccls-ruby_extension'
-	config.gem 'ccls-rails_extension'
-	config.gem 'ccls-simply_helpful'
+	config.gem 'ccls-common_lib'
+#	config.gem 'ccls-ruby_extension'
+#	config.gem 'ccls-rails_extension'
+#	config.gem 'ccls-simply_helpful'
 
 	# Settings in config/environments/* take precedence over those specified here.
 	# Application configuration should go into files in config/initializers
